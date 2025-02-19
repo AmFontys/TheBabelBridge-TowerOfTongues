@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /api/
+
+# Allow all other pages
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.BabelBridge.com/sitemap.xml

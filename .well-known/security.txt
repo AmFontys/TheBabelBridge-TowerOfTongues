@@ -1,0 +1,8 @@
+Contact: mailto:security@babelbridge.com
+Expires: 2025-12-31T23:00:00.000Z
+Acknowledgments: https://www.BabelBridge.com/Hall-of-Fame-Security
+Preferred-Languages: en, nl, jp
+Canonical: https://www.BabelBridge.com/.well-known/security.txt
+Policy: https://www.BabelBridge.com/security-policy
+Hiring: https://www.BabelBridge.com/security-jobs
+CSAF: https://www.www.BabelBridge.com//.well-known/csaf/provider-metadata.json
