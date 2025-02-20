@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BBTT.BenchMarkingConsole": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

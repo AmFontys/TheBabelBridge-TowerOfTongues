@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBTT.Tests", "BBTT\BBTT.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBTT.Web", "BBTT\BBTT.Web\BBTT.Web.csproj", "{31B7EDCB-E749-4D01-A40A-E8BAA930DEA4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarking", "Benchmarking", "{78F3005F-469A-4D69-A6CF-BDA271B3CAEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{4F3A83FE-60CD-4027-B4BD-004A8AFAC3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBTT.BenchMarkingConsole", "BBTT\BBTT.BenchMarkingConsole\BBTT.BenchMarkingConsole.csproj", "{BF4B506D-B3E5-479B-A17A-B63244CB2098}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +45,15 @@ Global
 		{31B7EDCB-E749-4D01-A40A-E8BAA930DEA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B7EDCB-E749-4D01-A40A-E8BAA930DEA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B7EDCB-E749-4D01-A40A-E8BAA930DEA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF4B506D-B3E5-479B-A17A-B63244CB2098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF4B506D-B3E5-479B-A17A-B63244CB2098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF4B506D-B3E5-479B-A17A-B63244CB2098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF4B506D-B3E5-479B-A17A-B63244CB2098}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BF4B506D-B3E5-479B-A17A-B63244CB2098} = {78F3005F-469A-4D69-A6CF-BDA271B3CAEB}
 	EndGlobalSection
 EndGlobal
