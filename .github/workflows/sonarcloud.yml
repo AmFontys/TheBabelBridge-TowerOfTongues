@@ -50,6 +50,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin "serverUrl=https://sonarcloud.io;token=${{ secrets.SONAR_TOKEN }}" /k:"AmFontys_TheBabelBridge-TowerOfTongues/BBTT" /o:"amfontys"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AmFontys_TheBabelBridge-TowerOfTongues" /o:"amfontys" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end
