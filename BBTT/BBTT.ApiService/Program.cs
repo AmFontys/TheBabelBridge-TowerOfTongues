@@ -30,7 +30,12 @@ app.MapGet("/weatherforecast", () =>
 app.MapDefaultEndpoints();
 
 app.Run();
-
+/// <summary>
+/// An example
+/// </summary>
+/// <param name="Date"></param>
+/// <param name="TemperatureC"></param>
+/// <param name="Summary"></param>
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);

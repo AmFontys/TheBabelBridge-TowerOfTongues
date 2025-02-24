@@ -1,5 +1,8 @@
 namespace BBTT.Web;
-
+/// <summary>
+/// This should work
+/// </summary>
+/// <param name="httpClient"></param>
 public class WeatherApiClient(HttpClient httpClient)
 {
     public async Task<WeatherForecast[]> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default)

@@ -1,0 +1,412 @@
+{
+  "source_base_path": "C:/Users/Arenc/OneDrive - Office 365 Fontys/25_S7-ADV/Solo/TheBabelBridge-TowerOfTongues",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "SECURITY.md",
+      "output": {
+        ".html": {
+          "relative_path": "SECURITY.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.App.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.App",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Layout.MainLayout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Layout.MainLayout.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Layout.MainLayout",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Layout.NavMenu.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Layout.NavMenu.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Layout.NavMenu",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Layout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Layout.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Layout",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Pages.Counter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Pages.Counter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Pages.Counter",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Pages.Error.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Pages.Error.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Pages.Error",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Pages.Home.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Pages.Home.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Pages.Home",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Pages.Weather.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Pages.Weather.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Pages.Weather",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Pages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Pages.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Pages",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.Routes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.Routes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components.Routes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components._Imports.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components._Imports.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components._Imports",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.Components.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.Components.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.Components",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.WeatherApiClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.WeatherApiClient.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.WeatherApiClient",
+      "Summary": "<p sourcefile=\"api/BBTT.Web.WeatherApiClient.yml\" sourcestartlinenumber=\"1\">This should work</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.WeatherForecast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.WeatherForecast.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web.WeatherForecast",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BBTT.Web.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BBTT.Web.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BBTT.Web",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.Extensions.Hosting.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.Extensions.Hosting.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Microsoft.Extensions.Hosting.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.Extensions.Hosting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.Extensions.Hosting.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Microsoft.Extensions.Hosting",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.BBTT_ApiService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.BBTT_ApiService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects.BBTT_ApiService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.BBTT_AppHost.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.BBTT_AppHost.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects.BBTT_AppHost",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.BBTT_Web.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.BBTT_Web.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects.BBTT_Web",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/example.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/example.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

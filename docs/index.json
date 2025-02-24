@@ -1,0 +1,137 @@
+{
+  "README.html": {
+    "href": "README.html",
+    "title": "TheBabelBridge-TowerOfTongues | BabelBridge-TowerOfTongues",
+    "summary": "TheBabelBridge-TowerOfTongues The Babel Bridge - Tower of Tongues is about a website where the first point is to play crossword puzzles online with multiple people."
+  },
+  "SECURITY.html": {
+    "href": "SECURITY.html",
+    "title": "Security Policy | BabelBridge-TowerOfTongues",
+    "summary": "Security Policy Reporting a Vulnerability If you discover a security vulnerability, please contact us at security@babelbridge.com. We will respond as quickly as possible to address the issue. Acknowledgments We appreciate the efforts of security researchers and are happy to acknowledge their contributions on our Hall of Fame page. See it at https://www.BabelBridge.com/Hall-of-Fame-Security Preferred Languages We accept vulnerability reports in English (en), Dutch (nl), and Japanese (jp). Additional Information Hiring: https://www.BabelBridge.com/security-jobs CSAF Provider Metadata: https://www.www.BabelBridge.com//.well-known/csaf/provider-metadata.json"
+  },
+  "api/BBTT.Web.Components.App.html": {
+    "href": "api/BBTT.Web.Components.App.html",
+    "title": "Class App | BabelBridge-TowerOfTongues",
+    "summary": "Class App Namespace BBTT.Web.Components Assembly BBTT.Web.dll public class App : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase App Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors App() public App() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components.Layout.MainLayout.html": {
+    "href": "api/BBTT.Web.Components.Layout.MainLayout.html",
+    "title": "Class MainLayout | BabelBridge-TowerOfTongues",
+    "summary": "Class MainLayout Namespace BBTT.Web.Components.Layout Assembly BBTT.Web.dll public class MainLayout : LayoutComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase LayoutComponentBase MainLayout Implements IComponent IHandleEvent IHandleAfterRender Inherited Members LayoutComponentBase.SetParametersAsync(ParameterView) LayoutComponentBase.Body ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors MainLayout() public MainLayout() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components.Layout.NavMenu.html": {
+    "href": "api/BBTT.Web.Components.Layout.NavMenu.html",
+    "title": "Class NavMenu | BabelBridge-TowerOfTongues",
+    "summary": "Class NavMenu Namespace BBTT.Web.Components.Layout Assembly BBTT.Web.dll public class NavMenu : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase NavMenu Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors NavMenu() public NavMenu() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components.Layout.html": {
+    "href": "api/BBTT.Web.Components.Layout.html",
+    "title": "Namespace BBTT.Web.Components.Layout | BabelBridge-TowerOfTongues",
+    "summary": "Namespace BBTT.Web.Components.Layout Classes MainLayout NavMenu"
+  },
+  "api/BBTT.Web.Components.Pages.Counter.html": {
+    "href": "api/BBTT.Web.Components.Pages.Counter.html",
+    "title": "Class Counter | BabelBridge-TowerOfTongues",
+    "summary": "Class Counter Namespace BBTT.Web.Components.Pages Assembly BBTT.Web.dll [Route(\"/counter\")] public class Counter : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase Counter Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors Counter() public Counter() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components.Pages.Error.html": {
+    "href": "api/BBTT.Web.Components.Pages.Error.html",
+    "title": "Class Error | BabelBridge-TowerOfTongues",
+    "summary": "Class Error Namespace BBTT.Web.Components.Pages Assembly BBTT.Web.dll [Route(\"/Error\")] public class Error : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase Error Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors Error() public Error() Properties HttpContext [CascadingParameter] public HttpContext? HttpContext { get; set; } Property Value HttpContext Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder OnInitialized() protected override void OnInitialized()"
+  },
+  "api/BBTT.Web.Components.Pages.Home.html": {
+    "href": "api/BBTT.Web.Components.Pages.Home.html",
+    "title": "Class Home | BabelBridge-TowerOfTongues",
+    "summary": "Class Home Namespace BBTT.Web.Components.Pages Assembly BBTT.Web.dll [Route(\"/\")] public class Home : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase Home Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors Home() public Home() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components.Pages.Weather.html": {
+    "href": "api/BBTT.Web.Components.Pages.Weather.html",
+    "title": "Class Weather | BabelBridge-TowerOfTongues",
+    "summary": "Class Weather Namespace BBTT.Web.Components.Pages Assembly BBTT.Web.dll [StreamRendering(true)] [OutputCache(Duration = 5)] [Route(\"/weather\")] public class Weather : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase Weather Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors Weather() public Weather() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder OnInitializedAsync() protected override Task OnInitializedAsync() Returns Task"
+  },
+  "api/BBTT.Web.Components.Pages.html": {
+    "href": "api/BBTT.Web.Components.Pages.html",
+    "title": "Namespace BBTT.Web.Components.Pages | BabelBridge-TowerOfTongues",
+    "summary": "Namespace BBTT.Web.Components.Pages Classes Counter Error Home Weather"
+  },
+  "api/BBTT.Web.Components.Routes.html": {
+    "href": "api/BBTT.Web.Components.Routes.html",
+    "title": "Class Routes | BabelBridge-TowerOfTongues",
+    "summary": "Class Routes Namespace BBTT.Web.Components Assembly BBTT.Web.dll public class Routes : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase Routes Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors Routes() public Routes() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components._Imports.html": {
+    "href": "api/BBTT.Web.Components._Imports.html",
+    "title": "Class _Imports | BabelBridge-TowerOfTongues",
+    "summary": "Class _Imports Namespace BBTT.Web.Components Assembly BBTT.Web.dll public class _Imports : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase _Imports Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors _Imports() public _Imports() Methods BuildRenderTree(RenderTreeBuilder) protected override void BuildRenderTree(RenderTreeBuilder __builder) Parameters __builder RenderTreeBuilder"
+  },
+  "api/BBTT.Web.Components.html": {
+    "href": "api/BBTT.Web.Components.html",
+    "title": "Namespace BBTT.Web.Components | BabelBridge-TowerOfTongues",
+    "summary": "Namespace BBTT.Web.Components Classes App Routes _Imports"
+  },
+  "api/BBTT.Web.WeatherApiClient.html": {
+    "href": "api/BBTT.Web.WeatherApiClient.html",
+    "title": "Class WeatherApiClient | BabelBridge-TowerOfTongues",
+    "summary": "Class WeatherApiClient Namespace BBTT.Web Assembly BBTT.Web.dll This should work public class WeatherApiClient Inheritance object WeatherApiClient Inherited Members object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors WeatherApiClient(HttpClient) This should work public WeatherApiClient(HttpClient httpClient) Parameters httpClient HttpClient Methods GetWeatherAsync(int, CancellationToken) public Task<WeatherForecast[]> GetWeatherAsync(int maxItems = 10, CancellationToken cancellationToken = default) Parameters maxItems int cancellationToken CancellationToken Returns Task<WeatherForecast[]>"
+  },
+  "api/BBTT.Web.WeatherForecast.html": {
+    "href": "api/BBTT.Web.WeatherForecast.html",
+    "title": "Class WeatherForecast | BabelBridge-TowerOfTongues",
+    "summary": "Class WeatherForecast Namespace BBTT.Web Assembly BBTT.Web.dll public record WeatherForecast : IEquatable<WeatherForecast> Inheritance object WeatherForecast Implements IEquatable<WeatherForecast> Inherited Members object.GetType() object.MemberwiseClone() object.Equals(object, object) object.ReferenceEquals(object, object) Constructors WeatherForecast(WeatherForecast) protected WeatherForecast(WeatherForecast original) Parameters original WeatherForecast WeatherForecast(DateOnly, int, string?) public WeatherForecast(DateOnly Date, int TemperatureC, string? Summary) Parameters Date DateOnly TemperatureC int Summary string Properties Date public DateOnly Date { get; init; } Property Value DateOnly EqualityContract protected virtual Type EqualityContract { get; } Property Value Type Summary public string? Summary { get; init; } Property Value string TemperatureC public int TemperatureC { get; init; } Property Value int TemperatureF public int TemperatureF { get; } Property Value int Methods Deconstruct(out DateOnly, out int, out string?) public void Deconstruct(out DateOnly Date, out int TemperatureC, out string? Summary) Parameters Date DateOnly TemperatureC int Summary string Equals(WeatherForecast?) public virtual bool Equals(WeatherForecast? other) Parameters other WeatherForecast Returns bool Equals(object?) public override bool Equals(object? obj) Parameters obj object Returns bool GetHashCode() public override int GetHashCode() Returns int PrintMembers(StringBuilder) protected virtual bool PrintMembers(StringBuilder builder) Parameters builder StringBuilder Returns bool ToString() public override string ToString() Returns string Operators operator ==(WeatherForecast?, WeatherForecast?) public static bool operator ==(WeatherForecast? left, WeatherForecast? right) Parameters left WeatherForecast right WeatherForecast Returns bool operator !=(WeatherForecast?, WeatherForecast?) public static bool operator !=(WeatherForecast? left, WeatherForecast? right) Parameters left WeatherForecast right WeatherForecast Returns bool"
+  },
+  "api/BBTT.Web.html": {
+    "href": "api/BBTT.Web.html",
+    "title": "Namespace BBTT.Web | BabelBridge-TowerOfTongues",
+    "summary": "Namespace BBTT.Web Classes WeatherApiClient This should work WeatherForecast"
+  },
+  "api/Microsoft.Extensions.Hosting.Extensions.html": {
+    "href": "api/Microsoft.Extensions.Hosting.Extensions.html",
+    "title": "Class Extensions | BabelBridge-TowerOfTongues",
+    "summary": "Class Extensions Namespace Microsoft.Extensions.Hosting Assembly BBTT.ServiceDefaults.dll public static class Extensions Inheritance object Extensions Inherited Members object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Methods AddDefaultHealthChecks<TBuilder>(TBuilder) public static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder Parameters builder TBuilder Returns TBuilder Type Parameters TBuilder AddServiceDefaults<TBuilder>(TBuilder) public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder Parameters builder TBuilder Returns TBuilder Type Parameters TBuilder ConfigureOpenTelemetry<TBuilder>(TBuilder) public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder Parameters builder TBuilder Returns TBuilder Type Parameters TBuilder MapDefaultEndpoints(WebApplication) public static WebApplication MapDefaultEndpoints(this WebApplication app) Parameters app WebApplication Returns WebApplication"
+  },
+  "api/Microsoft.Extensions.Hosting.html": {
+    "href": "api/Microsoft.Extensions.Hosting.html",
+    "title": "Namespace Microsoft.Extensions.Hosting | BabelBridge-TowerOfTongues",
+    "summary": "Namespace Microsoft.Extensions.Hosting Classes Extensions"
+  },
+  "api/Projects.BBTT_ApiService.html": {
+    "href": "api/Projects.BBTT_ApiService.html",
+    "title": "Class BBTT_ApiService | BabelBridge-TowerOfTongues",
+    "summary": "Class BBTT_ApiService Namespace Projects Assembly BBTT.AppHost.dll public class BBTT_ApiService : IProjectMetadata, IResourceAnnotation Inheritance object BBTT_ApiService Implements IProjectMetadata IResourceAnnotation Inherited Members object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors BBTT_ApiService() public BBTT_ApiService() Properties ProjectPath public string ProjectPath { get; } Property Value string"
+  },
+  "api/Projects.BBTT_AppHost.html": {
+    "href": "api/Projects.BBTT_AppHost.html",
+    "title": "Class BBTT_AppHost | BabelBridge-TowerOfTongues",
+    "summary": "Class BBTT_AppHost Namespace Projects Assembly BBTT.AppHost.dll public class BBTT_AppHost Inheritance object BBTT_AppHost Inherited Members object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Properties ProjectPath public static string ProjectPath { get; } Property Value string"
+  },
+  "api/Projects.BBTT_Web.html": {
+    "href": "api/Projects.BBTT_Web.html",
+    "title": "Class BBTT_Web | BabelBridge-TowerOfTongues",
+    "summary": "Class BBTT_Web Namespace Projects Assembly BBTT.AppHost.dll public class BBTT_Web : IProjectMetadata, IResourceAnnotation Inheritance object BBTT_Web Implements IProjectMetadata IResourceAnnotation Inherited Members object.GetType() object.MemberwiseClone() object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() Constructors BBTT_Web() public BBTT_Web() Properties ProjectPath public string ProjectPath { get; } Property Value string"
+  },
+  "api/Projects.html": {
+    "href": "api/Projects.html",
+    "title": "Namespace Projects | BabelBridge-TowerOfTongues",
+    "summary": "Namespace Projects Classes BBTT_ApiService BBTT_AppHost BBTT_Web"
+  },
+  "articles/example.html": {
+    "href": "articles/example.html",
+    "title": "Example | BabelBridge-TowerOfTongues",
+    "summary": "Example This should be an example that would be automatically added."
+  },
+  "articles/getting-started.html": {
+    "href": "articles/getting-started.html",
+    "title": "Getting Started | BabelBridge-TowerOfTongues",
+    "summary": "Getting Started"
+  },
+  "articles/introduction.html": {
+    "href": "articles/introduction.html",
+    "title": "Introduction | BabelBridge-TowerOfTongues",
+    "summary": "Introduction"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "This is the HOMEPAGE. | BabelBridge-TowerOfTongues",
+    "summary": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
+  }
+}
