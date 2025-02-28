@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
     <ProjectReference Include="..\BBTT.ServiceDefaults\BBTT.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Components\Pages\CrosswordMaker.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
   </ItemGroup>
 
 </Project>

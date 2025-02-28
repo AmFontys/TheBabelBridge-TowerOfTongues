@@ -1,0 +1,114 @@
+﻿@page "/crosswordmaker"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+@using BBTT.CrosswordModel;
+
+@inject CrossWordApiClient CrossWordApi
+
+<PageTitle>CrosswordMaker</PageTitle>
+
+<h1>Crossword Maker</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+@if(message != null){
+    <p>@message</p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Word</th>
+            <th>Hint</th>
+            <th>Direction</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var word in chosenWords)
+        {
+            <tr>
+                <td>@word.Word</td>
+                <td>@word.Hint</td>
+                <td>@word.Direction</td>
+                <td> 
+                    <button class="btn btn-danger" @onclick="() => RemoveWord(word)">Remove</button>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <input type="text" @bind="newWord" class="form-control" placeholder="Type a word...">                
+            </td>
+            <td>
+                <input type="text" @bind="newHint" class="form-control" placeholder="Type a hint...">
+            </td>
+            <td>
+                <select @bind="newDirection" class="form-control">
+                    <option value="Across">Across</option>
+                    <option value="Down">Down</option>
+                </select>
+            </td>
+            <td>
+                <button class="btn btn-primary" @onclick="()=>AddWord(newWord)">+</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="btn btn-success" @onclick="SendWordsForGeneration">Generate Crossword</button>
+
+@code {
+    private CrosswordWord[]? crosswords;
+    private readonly List<CrosswordWord> chosenWords = new();
+    private string? message;
+    private string? newWord;
+    private string? newHint;
+    private List<CrosswordWord> suggestions = new();
+
+    private string newDirection = "Across";
+
+    private void AddWord(string word)
+    {
+        if (string.IsNullOrWhiteSpace(word) || string.IsNullOrWhiteSpace(newHint))
+        {
+            message = "Word and hint cannot be empty.";
+            return;
+        }
+
+        CrosswordWord crosswordWord = new CrosswordWord(word, newHint, newDirection);           
+        chosenWords.Add(crosswordWord);
+        newWord = string.Empty;
+        newHint = string.Empty;
+        newDirection = "Across";
+        suggestions.Clear();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //TODO: Maybe add suggestions
+    }
+
+    private async Task<string> SendWordsForGeneration(){
+        if(chosenWords == null || chosenWords.Count < 2){
+            message = "Not enough words added";
+            return message;
+        }
+
+        return await CrossWordApi.PostWordsGetGrid(chosenWords.ToArray());
+    }
+
+    private async Task GetClosestWords()
+    {
+        if (!string.IsNullOrWhiteSpace(newWord))
+        {
+            suggestions = await CrossWordApi.GetClosestWord(newWord);
+        }
+    }  
+
+    private void RemoveWord(CrosswordWord word)
+    {
+        chosenWords.Remove(word);
+    }
+}
