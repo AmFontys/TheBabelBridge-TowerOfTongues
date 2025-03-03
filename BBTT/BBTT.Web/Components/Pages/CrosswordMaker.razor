@@ -1,7 +1,7 @@
 ﻿@page "/crosswordmaker"
 @rendermode InteractiveServer
 @attribute [StreamRendering(true)]
-@attribute [OutputCache(Duration = 5)]
+@* @attribute [OutputCache(Duration = 5)] *@
 @using BBTT.CrosswordModel;
 
 @inject CrossWordApiClient CrossWordApi
@@ -59,6 +59,36 @@
 
 <button class="btn btn-success" @onclick="SendWordsForGeneration">Generate Crossword</button>
 
+@if(grid==null){
+    <p>Not yet created</p>
+}
+else{
+    // Determine the bounds of the grid
+    var minX = grid.Grid.Keys.Min(k => k.Item1);
+    var maxX = grid.Grid.Keys.Max(k => k.Item1);
+    var minY = grid.Grid.Keys.Min(k => k.Item2);
+    var maxY = grid.Grid.Keys.Max(k => k.Item2);
+
+        <table class="table">
+            <tbody>
+            @for (int x = minX; x <= maxX; x++)
+            {
+                <tr>
+                    @for (int y = minY; y <= maxY; y++)
+                    {
+                        <td>
+                            @if (grid.Grid.TryGetValue((x, y), out var value))
+                            {
+                                @value
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+}
+
 @code {
     private CrosswordWord[]? crosswords;
     private readonly List<CrosswordWord> chosenWords = new();
@@ -66,6 +96,7 @@
     private string? newWord;
     private string? newHint;
     private List<CrosswordWord> suggestions = new();
+    private CrosswordGrid grid;
 
     private string newDirection = "Across";
 
@@ -90,13 +121,28 @@
         //TODO: Maybe add suggestions
     }
 
-    private async Task<string> SendWordsForGeneration(){
+    private async Task SendWordsForGeneration(){
         if(chosenWords == null || chosenWords.Count < 2){
-            message = "Not enough words added";
-            return message;
+            message = "Not enough words added";            
         }
 
-        return await CrossWordApi.PostWordsGetGrid(chosenWords.ToArray());
+        try
+        {
+            var response = await CrossWordApi.PostWordsGetGrid(chosenWords.ToArray());
+            if (response != null && response.Grid != null && response.Grid.Count > 0)
+            {
+                grid = response;
+                message = null;
+            }
+            else
+            {
+                message = "Failed to generate crossword grid.";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = $"An error occurred: {ex.Message}";
+        }
     }
 
     private async Task GetClosestWords()

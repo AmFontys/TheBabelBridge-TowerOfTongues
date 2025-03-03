@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace BBTT.CrosswordModel;
 public class CrosswordGrid
 {
-    private Dictionary<Array, char>? grid;
+    public Dictionary<(int, int), char> Grid { get; set; } = new Dictionary<(int, int), char>();
 
-    public Dictionary<Array,char> Grid { get => grid; set => grid = value; }
+    public override string ToString()
+    {
+        return string.Join(", ", Grid.Select(kv => $"({kv.Key.Item1}, {kv.Key.Item2}): {kv.Value}"));
+    }
 }

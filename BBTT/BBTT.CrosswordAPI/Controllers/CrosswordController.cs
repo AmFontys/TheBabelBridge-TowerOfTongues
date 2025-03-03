@@ -1,6 +1,7 @@
 using BBTT.CrosswordCore;
 using BBTT.CrosswordModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace BBTT.CrosswordAPI.Controllers;
 
@@ -30,11 +31,39 @@ public class CrosswordController : ControllerBase
         return list;
     }
 
-    [HttpPost(Name ="PostCrosswordGeneration")]
-    public async Task<string> PostCrosswordGeneration (CrosswordWord[] words, CancellationToken cancellationToken)
+    [HttpPost(Name = "PostCrosswordGeneration")]
+    public async Task<IActionResult> PostCrosswordGeneration(CrosswordWord[] words, CancellationToken cancellationToken)
     {
-        var result= await _crosswordAccesor.ConstructCrossword(words,cancellationToken);
-        //TODO: add something to handle the returned grid
-        return "Done";
+        if (words == null || words.Length == 0)
+        {
+            return BadRequest("Words cannot be null or empty.");
+        }
+
+        try
+        {
+            var result = await _crosswordAccesor.ConstructCrossword(words, cancellationToken);
+            if (result == null || result.Grid == null || result.Grid.Count == 0)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to generate crossword grid.");
+            }
+
+            result = _crosswordAccesor.AddBlankValuesToGrid(result);
+
+            var gridWithStringKeys = result.Grid.ToDictionary(
+                kvp => kvp.Key.ToString(),
+                kvp => kvp.Value
+                );
+            string JsonString = JsonSerializer.Serialize(gridWithStringKeys);
+            return Ok(JsonString);
+        }
+        catch (OperationCanceledException)
+        {
+            return StatusCode(StatusCodes.Status408RequestTimeout, "The operation was canceled due to timeout.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error generating crossword grid.");
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while generating the crossword grid.");
+        }
     }
 }

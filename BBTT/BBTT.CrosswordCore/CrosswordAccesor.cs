@@ -12,12 +12,38 @@ public class CrosswordAccesor : ICrosswordAccesor
         _crosswordGenerator = crosswordGenerator;
     }
 
-    public async Task<string> ConstructCrossword (CrosswordWord [] words, CancellationToken cancellationToken)
+    public CrosswordGrid AddBlankValuesToGrid (CrosswordGrid result)
+    {
+        int minRow = result.Grid.Keys.Min(k => k.Item1);
+        int maxRow = result.Grid.Keys.Max(k => k.Item1);
+
+        int minCol = result.Grid.Keys.Min(k => k.Item2);
+        int maxCol = result.Grid.Keys.Max(k => k.Item2);
+
+        for (int i = minRow; i <= maxRow; i++)
+        {
+            for (int j = minCol; j <= maxCol; j++)
+            {
+                if (!result.Grid.ContainsKey((i, j)))
+                {
+                    result.Grid.Add((i, j), '@');
+                }
+            }
+        }
+        return result;
+
+    }
+
+    public async Task<CrosswordGrid> ConstructCrossword (CrosswordWord [] words, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(words);
         var grid = await _crosswordGenerator.ConstructCrossword(words, cancellationToken);
         if (grid != null)
-            return "Something";
+        {
+            CrosswordGrid crosswordGrid = new();
+            crosswordGrid.Grid = grid;
+            return crosswordGrid;
+        }
         //TODO Add logic if no grid could be made
         return null;
     }
