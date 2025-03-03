@@ -4,10 +4,10 @@ on:
       branches:
         - main
   
-  permissions:
+permissions:
     contents: write
   
-  jobs:
+jobs:
     publish-docs:
       runs-on: ubuntu-latest
       steps:
