@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../",
+          "files": ["**/bin/Release/**/BBTT.**.dll"]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**",
+          "docs/**",
+          "Documents/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "docs",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "BabelBridge-TowerOfTongues",
+      "_appTitle": "BabelBridge-TowerOfTongues",
+      "_enableSearch": true,
+      "pdf": true
+    }
+  }
+}

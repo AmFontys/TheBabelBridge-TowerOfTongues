@@ -1,0 +1,47 @@
+name: docfx-wiki-deploy
+on:
+    push:
+      branches:
+        - main
+  
+permissions:
+    contents: write
+  
+jobs:
+    publish-docs:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+  
+        - name: Dotnet Setup
+          uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: 8.x
+  
+        - name: Install DocFX
+          run: dotnet tool update -g docfx
+  
+        - name: Build Documentation
+          run: docfx docfx.json # Runs docfx from the root
+  
+        - name: Checkout Wiki-pages branch
+          uses: actions/checkout@v3
+          with:
+            ref: Wiki-pages
+            path: wiki-pages
+  
+        - name: Copy documentation to Wiki-pages
+          run: |
+            rm -rf wiki-pages/docs/* # Clear existing docs in wiki-pages/docs
+            mkdir -p wiki-pages/docs  # Create the docs directory if it doesn't exist
+            cp -r _site/* wiki-pages/docs/ # Copy from _site to wiki-pages/docs
+  
+        - name: Commit and push changes
+          run: |
+            cd wiki-pages
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add .
+            git commit -m "Updated documentation"
+            git push origin Wiki-pages

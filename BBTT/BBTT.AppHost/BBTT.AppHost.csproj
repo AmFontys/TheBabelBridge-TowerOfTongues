@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
 
@@ -9,10 +9,13 @@
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>805f484c-16c9-4c34-9eb3-25e22452fef7</UserSecretsId>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BBTT.ApiService\BBTT.ApiService.csproj" />
+    <ProjectReference Include="..\BBTT.CrosswordAPI\BBTT.CrosswordAPI.csproj" />
     <ProjectReference Include="..\BBTT.Web\BBTT.Web.csproj" />
   </ItemGroup>
 
