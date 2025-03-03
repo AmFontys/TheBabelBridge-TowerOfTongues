@@ -54,8 +54,6 @@ public class CrossWordApiClient
 
     private static CrosswordGrid DeserializeCrosswordGrid(string serializedGrid)
     {
-        var options = new JsonSerializerOptions();
-        options.Converters.Add(new ValueTupleKeyConverter());
         CrosswordGrid? grid = new();
 
         try
