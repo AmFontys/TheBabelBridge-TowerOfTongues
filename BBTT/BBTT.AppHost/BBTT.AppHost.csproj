@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BBTT.ApiService\BBTT.ApiService.csproj" />
     <ProjectReference Include="..\BBTT.CrosswordAPI\BBTT.CrosswordAPI.csproj" />
+    <ProjectReference Include="..\BBTT.DataApi\BBTT.DataApi.csproj" />
     <ProjectReference Include="..\BBTT.Web\BBTT.Web.csproj" />
   </ItemGroup>
 

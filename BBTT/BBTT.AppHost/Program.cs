@@ -12,4 +12,6 @@ builder.AddProject<Projects.BBTT_Web>("webfrontend")
     .WaitFor(crosswordAPI)
     .WaitFor(apiService);
 
+builder.AddProject<Projects.BBTT_DataApi>("bbtt-dataapi");
+
 builder.Build().Run();

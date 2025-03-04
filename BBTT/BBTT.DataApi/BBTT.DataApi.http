@@ -1,0 +1,6 @@
+@BBTT.DataApi_HostAddress = http://localhost:5239
+
+GET {{BBTT.DataApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
