@@ -1,4 +1,6 @@
 ﻿using BBTT.CrosswordModel;
+using Newtonsoft.Json;
+using System.Collections.Specialized;
 using System.Net.Http;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
@@ -58,20 +60,23 @@ public class CrossWordApiClient
 
         try
         {
+            var desrializedGrid = JsonConvert.DeserializeObject<Dictionary<string, char>>(serializedGrid);
 
-            string pattern = @"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)"":""\s*([\w\@])";
-            
+            var regex = new Regex(@"\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)");
 
-            foreach (Match match in Regex.Matches(serializedGrid, pattern))
+            foreach (var kvp in desrializedGrid)
             {
-                int firstDigit=(int.Parse(match.Groups [ 1 ].Value));
-                int secondDigit=(int.Parse(match.Groups [ 2 ].Value));
-                char value =(char.Parse(match.Groups [ 3 ].Value));
-                grid.Grid.Add((firstDigit, secondDigit), value);
+                var match = regex.Match(kvp.Key);
+                if (match.Success)
+                {
+                    int x = int.Parse(match.Groups [ 1 ].Value);
+                    int y = int.Parse(match.Groups [ 2 ].Value);
+                    grid.Grid.Add((x, y), kvp.Value);
+                }
             }
 
 
-            
+
             if (grid == null)
             {
                 throw new InvalidOperationException("Deserialization returned null.");
