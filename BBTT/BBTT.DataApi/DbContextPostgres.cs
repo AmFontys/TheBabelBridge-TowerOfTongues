@@ -5,12 +5,17 @@ namespace BBTT.DataApi;
 
 public class DbContextPostgres : DbContext
 {
-    public DbContextPostgres(DbContextOptions<DbContextPostgres> options) : base(options)
-    {
-    }
+    public DbContextPostgres(DbContextOptions options) : base(options) { }
 
-    // Define DbSets for your entities here
-    // public DbSet<YourEntity> YourEntities { get; set; }
-    public DbSet<CrosswordDto> Crossword { get; set; }
-    public DbSet<CrosswordGridDto> CrosswordGrid { get; set; }
+    public DbSet<CrosswordDto> Crossword => Set<CrosswordDto>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<CrosswordGridDto>()
+            .HasMany(c => c.GridEntries)
+            .WithOne()
+            .HasForeignKey(e => e.CrosswordGridId);
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

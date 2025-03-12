@@ -1,4 +1,5 @@
 
+using BBTT.DataApi.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 
@@ -13,6 +14,8 @@ public class Program
 
         // Add services to the container.
         builder.AddNpgsqlDbContext<DbContextPostgres>("bbttdb");
+        //builder.Services.AddSingleton<DbContextPostgres>();
+        //builder.Services.AddSingleton<Service>();
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,6 +25,7 @@ public class Program
         var app = builder.Build();
 
         app.MapDefaultEndpoints();
+        app.MapPgsqlAspireEndpoint();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

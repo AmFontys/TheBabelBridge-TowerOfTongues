@@ -1,4 +1,5 @@
-﻿using BBTT.DBModels.Crossword;
+﻿using BBTT.DataApi.Controllers;
+using BBTT.DBModels.Crossword;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
@@ -13,8 +14,9 @@ public class Service
         _dataSource = dataSource;
     }
 
-    public async Task<IEnumerable<CrosswordDto>> GetCrossword()
+    public static async Task<IEnumerable<CrosswordDto>> GetCrossword()
     {
+        var _dataSource = new DbContextPostgres(new DbContextOptions<DbContextPostgres>());
         var crosswords = await _dataSource.Crossword.ToListAsync();
         if (crosswords == null)
         {

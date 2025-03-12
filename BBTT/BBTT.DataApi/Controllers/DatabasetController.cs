@@ -6,5 +6,12 @@ namespace BBTT.DataApi.Controllers;
 [Route("[controller]")]
 public class DatabasetController : ControllerBase
 {
-    
+    public Service service;
+
+
+    [ HttpGet]
+    public async Task Get ()
+    {
+        //DbContextPostgres
+    }
 }
