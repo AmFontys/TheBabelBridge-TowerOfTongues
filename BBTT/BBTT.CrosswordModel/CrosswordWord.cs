@@ -38,13 +38,13 @@ public class CrosswordWord
 
     }
 
-    public string Word { get; set; }
-    public string Diffuclty { get; set; }
-    public string Language { get; set; }
+    public string? Word { get; set; }
+    public string? Diffuclty { get; set; }
+    public string? Language { get; set; }
 
     public string? Hint { get; set; }
 
-    public string Direction { get; set; }
+    public string? Direction { get; set; }
 
     public override string? ToString()
     {

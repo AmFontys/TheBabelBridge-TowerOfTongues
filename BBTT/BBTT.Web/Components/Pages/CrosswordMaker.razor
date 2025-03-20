@@ -116,9 +116,9 @@ else{
     private string? newWord;
     private string? newHint;
     private List<CrosswordWord> suggestions = new();
-    private Crossword crossword = new();
+    private readonly Crossword crossword = new();
 
-    private string newDirection = "Across";
+    private string newDirection = "ACROSS";
 
     private void AddWord(string word)
     {

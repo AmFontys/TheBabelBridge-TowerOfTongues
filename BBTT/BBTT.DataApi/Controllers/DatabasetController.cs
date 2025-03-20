@@ -21,13 +21,12 @@ public class DatabasetController : ControllerBase
     [ HttpPost]
     public async Task<IActionResult> Get(DbContextPostgres pgsqlDbContext, Crossword crossword)
     {
-        await _crosswordDataAcess.CreateCrossword(crossword);
-        var result = _crosswordDataAcess.GetCrossword(crossword);
-        await _crosswordDataAcess.CreateCrosswordGrid(result, crossword.CrosswordGrid);
-        if(result == null)
+        var id= await _crosswordDataAcess.CreateCrossword(crossword);        
+        var result =await _crosswordDataAcess.CreateCrosswordGrid(id, crossword.CrosswordGrid);
+        if(result == 0)
                 return NotFound();
 
-        return Ok("Saved");
+        return Ok();
        
     }
 }

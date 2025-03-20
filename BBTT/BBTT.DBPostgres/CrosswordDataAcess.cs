@@ -14,7 +14,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         _pgsqlDbContext = pgsqlDbContext;
     }
 
-    public async Task CreateCrossword (Crossword crossword)
+    public async Task<int> CreateCrossword (Crossword crossword)
     {
         CrosswordDto crosswordDto = new()
         {
@@ -23,7 +23,8 @@ public class CrosswordDataAcess : ICrosswordDataAccess
             Tags = crossword.Tags,
         };
         await _pgsqlDbContext.Crossword.AddAsync(crosswordDto);        
-        await _pgsqlDbContext.SaveChangesAsync();                
+        await _pgsqlDbContext.SaveChangesAsync();
+        return crosswordDto.Id;
     }
 
     public async Task<CrosswordDto> GetCrossword (int id)
@@ -31,24 +32,36 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         return await _pgsqlDbContext.Crossword.FindAsync(id);
     }
 
-    public async Task CreateCrosswordGrid (Task<CrosswordDto> result, CrosswordGrid crosswordGrid)
+    public async Task<int> CreateCrosswordGrid (int id, CrosswordGrid crosswordGrid)
     {
         var crosswordGridDto = new CrosswordGridDto()
         {
-            CrosswordId = result.Id,
+            CrosswordId = id,
             GridEntries = new(),
         };
         foreach (var item in crosswordGrid.GridEntries)
         {
             crosswordGridDto.GridEntries.Add(new GridEntryDTO()
             {
+                CrosswordGridId = crosswordGridDto.Id,
                 Row = item.Row,
                 Column = item.Column,
                 Value = item.Value,
             });
         }
-        await _pgsqlDbContext.CrosswordGrid.AddAsync(crosswordGridDto);
-        await _pgsqlDbContext.SaveChangesAsync();
+        try
+        {
+            await _pgsqlDbContext.CrosswordGrid.AddAsync(crosswordGridDto);
+            await _pgsqlDbContext.SaveChangesAsync();
+            return crosswordGridDto.Id;
+        }
+        catch (Exception)
+        {
+            return 0;
+            throw;
+        }
+        
+        
     }
 
     
