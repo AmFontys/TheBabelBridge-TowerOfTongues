@@ -8,11 +8,11 @@ namespace BBTT.CrosswordAPI.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class CrosswordController : ControllerBase
-{    
+{
     private readonly ILogger<CrosswordController> _logger;
     private readonly ICrosswordAccesor _crosswordAccesor;
 
-    public CrosswordController (ILogger<CrosswordController> logger, ICrosswordAccesor crosswordAccesor)
+    public CrosswordController(ILogger<CrosswordController> logger, ICrosswordAccesor crosswordAccesor)
     {
         _logger = logger;
         _crosswordAccesor = crosswordAccesor;
@@ -42,19 +42,20 @@ public class CrosswordController : ControllerBase
         try
         {
             var result = await _crosswordAccesor.ConstructCrossword(words, cancellationToken);
-            if (result == null || result.Grid == null || result.Grid.Count == 0)
+            if (result == null || result.GridEntries == null || result.GridEntries.Count == 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Failed to generate crossword grid.");
             }
 
             result = _crosswordAccesor.AddBlankValuesToGrid(result);
 
-            var gridWithStringKeys = result.Grid.ToDictionary(
-                kvp => kvp.Key.ToString(),
-                kvp => kvp.Value
-                );
-            string JsonString = JsonSerializer.Serialize(gridWithStringKeys);
-            return Ok(JsonString);
+            //var gridWithStringKeys = result.GridEntries.ToDictionary(
+            //    kvp => kvp.Key.ToString(),
+            //    kvp => kvp.Value
+            //    );
+            //string JsonString = JsonSerializer.Serialize(gridWithStringKeys);
+            return Ok(result);
+            //return Ok(JsonString);
         }
         catch (OperationCanceledException)
         {

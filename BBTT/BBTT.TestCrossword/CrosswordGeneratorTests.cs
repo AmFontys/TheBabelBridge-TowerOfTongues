@@ -10,14 +10,11 @@ namespace BBTT.TestCrossword
     public class CrosswordGeneratorTests
     {
         private MockRepository mockRepository;
-
-
+        private Random random;
 
         public CrosswordGeneratorTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
         }
 
         private CrosswordGenerator CreateCrosswordGenerator()
@@ -30,16 +27,23 @@ namespace BBTT.TestCrossword
         {
             // Arrange
             var crosswordGenerator = this.CreateCrosswordGenerator();
-            CrosswordWord[] words = null;
-            CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
+            List<CrosswordWord> words =
+            [
+                new CrosswordWord { Word = "bread", Direction = "ACROSS" },
+                new CrosswordWord { Word = "dream", Direction = "DOWN" },
+            ]; // Initialize words list
+
+            CancellationToken cancellationToken = default;
 
             // Act
             var result = await crosswordGenerator.ConstructCrossword(
-                words,
+                words.ToArray(),
                 cancellationToken);
 
             // Assert
-            Assert.True(false);
+            Assert.True(result != null);
+            Assert.True(result.Count > 0);
+            Assert.False(cancellationToken.IsCancellationRequested);
             this.mockRepository.VerifyAll();
         }
     }

@@ -27,6 +27,16 @@ namespace BBTT.TestCrossword
                 this.mockHttpClient.Object);
         }
 
+        private static List<CrosswordWord> CrosswordWords()
+        {
+            // This method returns a list of sample CrosswordWord objects for testing purposes.
+            return new List<CrosswordWord>
+                {
+                    new CrosswordWord { Word = "example", Diffuclty = "easy", Language = "en", Hint = "sample hint", Direction = "across" },
+                    new CrosswordWord { Word = "test", Diffuclty = "medium", Language = "en", Hint = "sample hint", Direction = "down" }
+                };
+        }
+
         [Fact]
         public async Task GetDictionary_StateUnderTest_ExpectedBehavior()
         {
@@ -50,7 +60,7 @@ namespace BBTT.TestCrossword
         {
             // Arrange
             var crossWordApiClient = this.CreateCrossWordApiClient();
-            CrosswordWord[] words = null;
+            CrosswordWord[] words = CrosswordWords().ToArray();
 
             // Act
             var result = await crossWordApiClient.PostWordsGetGrid(
@@ -66,7 +76,7 @@ namespace BBTT.TestCrossword
         {
             // Arrange
             var crossWordApiClient = this.CreateCrossWordApiClient();
-            string input = null;
+            string input = CrosswordWords().FirstOrDefault().Word;
 
             // Act
             var result = await crossWordApiClient.GetClosestWord(

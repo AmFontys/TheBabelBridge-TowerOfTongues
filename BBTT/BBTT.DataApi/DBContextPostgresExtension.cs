@@ -1,4 +1,5 @@
-﻿using BBTT.DBModels.Crossword;
+﻿using BBTT.DBModels;
+using BBTT.DBModels.Crossword;
 using Microsoft.EntityFrameworkCore;
 
 namespace BBTT.DataApi;
@@ -7,7 +8,7 @@ public static class DBContextPostgresExtension
 {
     public static void MapPgsqlAspireEndpoint (this WebApplication app)
     {
-        app.MapGet("/pgsql", async (DbContextPostgres pgsqlDbContext) =>
+        app.MapGet("/testConnection", async (DbContextPostgres pgsqlDbContext) =>
         {
             await pgsqlDbContext.Crossword.AddAsync(new CrosswordDto()
             {

@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
     <ProjectReference Include="..\BBTT.DBModels\BBTT.DBModels.csproj" />
+    <ProjectReference Include="..\BBTT.DBPostgres\BBTT.DBPostgres.csproj" />
     <ProjectReference Include="..\BBTT.ServiceDefaults\BBTT.ServiceDefaults.csproj" />
   </ItemGroup>
 

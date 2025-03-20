@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace BBTT.CrosswordModel;
 public class CrosswordGrid
 {
-    public Dictionary<(int, int), char> Grid { get; set; } = new Dictionary<(int, int), char>();
+    public List<GridEntry> GridEntries { get; set; } = new List<GridEntry>();
 
     public override string ToString()
     {
-        return string.Join(", ", Grid.Select(kv => $"({kv.Key.Item1}, {kv.Key.Item2}): {kv.Value}"));
+        return string.Join(", ", GridEntries.Select(e => $"({e.Row}, {e.Column}): {e.Value}"));
     }
 }

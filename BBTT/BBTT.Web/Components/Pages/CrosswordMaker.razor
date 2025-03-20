@@ -5,12 +5,11 @@
 @using BBTT.CrosswordModel;
 
 @inject CrossWordApiClient CrossWordApi
+@inject DataApiClient DataApi
 
 <PageTitle>CrosswordMaker</PageTitle>
 
 <h1>Crossword Maker</h1>
-
-<p>This component demonstrates showing data loaded from a backend API service.</p>
 
 @if(message != null){
     <p>@message</p>
@@ -59,15 +58,16 @@
 
 <button class="btn btn-success" @onclick="SendWordsForGeneration">Generate Crossword</button>
 
-@if(grid==null){
+@if (crossword.CrosswordGrid == null)
+{
     <p>Not yet created</p>
 }
 else{
     // Determine the bounds of the grid
-    var minX = grid.Grid.Keys.Min(k => k.Item1);
-    var maxX = grid.Grid.Keys.Max(k => k.Item1);
-    var minY = grid.Grid.Keys.Min(k => k.Item2);
-    var maxY = grid.Grid.Keys.Max(k => k.Item2);
+    var minX = crossword.CrosswordGrid.GridEntries.Min(e => e.Row);
+    var maxX = crossword.CrosswordGrid.GridEntries.Max(e => e.Row);
+    var minY = crossword.CrosswordGrid.GridEntries.Min(e => e.Column);
+    var maxY = crossword.CrosswordGrid.GridEntries.Max(e => e.Column);
 
         <table class="table">
             <tbody>
@@ -77,9 +77,9 @@ else{
                     @for (int y = minY; y <= maxY; y++)
                     {
                         <td>
-                            @if (grid.Grid.TryGetValue((x, y), out var value))
+                            @if (crossword.CrosswordGrid.GridEntries.FirstOrDefault(e => e.Row == x && e.Column == y) is GridEntry entry)
                             {
-                                @value
+                                @entry.Value
                             }
                         </td>
                     }
@@ -87,6 +87,26 @@ else{
             }
             </tbody>
         </table>
+
+        <div>
+            <div class="form-group row">
+                <label for="title" class="col-4 col-form-label">Title</label>
+                <div class="col-8">
+                    <input id="title" name="title" type="text" required="required" class="form-control" @bind="crossword.Name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-4 col-form-label">Description</label>
+                <div class="col-8">
+                    <textarea id="description" name="description" cols="40" rows="5" required="required" class="form-control" @bind="crossword.Description" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <button class="btn btn-primary" @onclick="SendToDatabase">Save Crossword</button>
+                </div>
+            </div>
+        </div>
 }
 
 @code {
@@ -96,7 +116,7 @@ else{
     private string? newWord;
     private string? newHint;
     private List<CrosswordWord> suggestions = new();
-    private CrosswordGrid grid;
+    private Crossword crossword = new();
 
     private string newDirection = "Across";
 
@@ -129,9 +149,9 @@ else{
         try
         {
             var response = await CrossWordApi.PostWordsGetGrid(chosenWords.ToArray());
-            if (response != null && response.Grid != null && response.Grid.Count > 0)
+            if (response != null && response.GridEntries != null && response.GridEntries.Count > 0)
             {
-                grid = response;
+                crossword.CrosswordGrid = response;
                 message = null;
             }
             else
@@ -156,5 +176,30 @@ else{
     private void RemoveWord(CrosswordWord word)
     {
         chosenWords.Remove(word);
+    }
+
+    private async Task SendToDatabase()
+    {
+        if (string.IsNullOrWhiteSpace(crossword.Name) || string.IsNullOrWhiteSpace(crossword.Description))
+        {
+            message = "Name and description cannot be empty.";
+            return;
+        }
+        try
+        {
+            var response = await DataApi.SaveCrossword(crossword);
+            if (response != null)
+            {
+                message = "Crossword saved successfully.";
+            }
+            else
+            {
+                message = "Failed to save crossword.";
+            }
+        }
+        catch (Exception ex)
+        {
+            message = $"An error occurred: {ex.Message}";
+        }
     }
 }

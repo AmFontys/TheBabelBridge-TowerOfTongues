@@ -14,7 +14,12 @@ builder.Services.AddOutputCache();
 
 builder.Services.AddHttpClient<CrossWordApiClient>(client =>
 {
-    client.BaseAddress = new("https+http://crosswordapi");
+    client.BaseAddress = new("https+http://crosswordapi");    
+});
+builder.Services.AddHttpClient<DataApiClient>(client =>
+{
+    client.BaseAddress = new("https+http://bbtt-dataapi");
+    client.Timeout = TimeSpan.FromMinutes(5);
 });
 
 var app = builder.Build();

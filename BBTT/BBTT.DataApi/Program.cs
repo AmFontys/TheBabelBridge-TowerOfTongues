@@ -1,5 +1,7 @@
 
 using BBTT.DataApi.Controllers;
+using BBTT.DBModels;
+using BBTT.DBPostgres;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 
@@ -14,8 +16,8 @@ public class Program
 
         // Add services to the container.
         builder.AddNpgsqlDbContext<DbContextPostgres>("bbttdb");
-        //builder.Services.AddSingleton<DbContextPostgres>();
-        //builder.Services.AddSingleton<Service>();
+        builder.Services.AddDbContext<DbContextPostgres>();
+        builder.Services.AddScoped<ICrosswordDataAccess, CrosswordDataAcess>();
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
