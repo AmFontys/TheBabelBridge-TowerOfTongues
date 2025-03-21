@@ -13,4 +13,4 @@ app.UseExceptionHandler();
 
 app.MapDefaultEndpoints();
 
-app.Run();
+await app.RunAsync();

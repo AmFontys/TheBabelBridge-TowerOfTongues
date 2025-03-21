@@ -5,7 +5,7 @@ namespace BBTT.CrosswordCore;
 
 public class CrosswordAccesor : ICrosswordAccesor
 {
-    private ICrosswordGenerator _crosswordGenerator;
+    private readonly ICrosswordGenerator _crosswordGenerator;
 
     public CrosswordAccesor(ICrosswordGenerator crosswordGenerator)
     {
@@ -35,16 +35,16 @@ public class CrosswordAccesor : ICrosswordAccesor
 
     public async Task<CrosswordGrid> ConstructCrossword(CrosswordWord[] words, CancellationToken cancellationToken)
     {
+        CrosswordGrid crosswordGrid = new();
         ArgumentNullException.ThrowIfNull(words);
         var grid = await _crosswordGenerator.ConstructCrossword(words, cancellationToken);
         if (grid != null)
         {
-            CrosswordGrid crosswordGrid = new();
             crosswordGrid.GridEntries = grid.Select(kvp => new GridEntry { Row = kvp.Key.x, Column = kvp.Key.y, Value = kvp.Value }).ToList(); ;
             return crosswordGrid;
         }
         //TODO Add logic if no grid could be made
-        return null;
+        return crosswordGrid;
     }
 
     public Task<string> ConstructCrossword(CrosswordWord[] verticalWords, CrosswordWord[] horizantalWords, CancellationToken cancellationToken)

@@ -7,26 +7,21 @@ namespace BBTT.CrosswordAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CrosswordController : ControllerBase
+public class CrosswordController (ILogger<CrosswordController> logger, ICrosswordAccesor crosswordAccesor) : ControllerBase
 {
-    private readonly ILogger<CrosswordController> _logger;
-    private readonly ICrosswordAccesor _crosswordAccesor;
-
-    public CrosswordController(ILogger<CrosswordController> logger, ICrosswordAccesor crosswordAccesor)
-    {
-        _logger = logger;
-        _crosswordAccesor = crosswordAccesor;
-    }
+    private const string Diffuclty = "Basic";
+    private readonly ILogger<CrosswordController> _logger = logger;
+    private readonly ICrosswordAccesor _crosswordAccesor = crosswordAccesor;
 
     [HttpGet(Name = "GetCrosswordWords")]
     public IEnumerable<CrosswordWord> Get()
     {
         List<CrosswordWord> list =
         [
-            new CrosswordWord("Apple", "Basic", "English", ""),
-            new CrosswordWord("Orange", "Basic", "English", ""),
-            new CrosswordWord("Banana", "Basic", "English", ""),
-            new CrosswordWord("Pear", "Basic", "English", ""),
+            new CrosswordWord("Apple", Diffuclty, "English", ""),
+            new CrosswordWord("Orange", Diffuclty, "English", ""),
+            new CrosswordWord("Banana", Diffuclty, "English", ""),
+            new CrosswordWord("Pear", Diffuclty, "English", ""),
         ];
         return list;
     }

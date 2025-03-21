@@ -7,15 +7,28 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 namespace BBTT.Web;
 
+/// <summary>
+/// The Api client for the Crossword functionality
+/// </summary>
 public class CrossWordApiClient
 {
     private readonly HttpClient _httpClient;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CrossWordApiClient"/> class.
+    /// </summary>
+    /// <param name="httpClient">The HTTP client derived from the settings set in <see cref="Program"/> class.</param>
     public CrossWordApiClient (HttpClient httpClient)
     {
         _httpClient = httpClient;
         _httpClient.Timeout = TimeSpan.FromMinutes(5); // Increase timeout to 5 minutes
     }
+    /// <summary>
+    /// Gets the dictionary.with words that can be used to fill in the crossword.
+    /// </summary>
+    /// <param name="maxItems">The maximum items.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     public async Task<CrosswordWord []> GetDictionary (int maxItems = 100, CancellationToken cancellationToken = default)
     {
         List<CrosswordWord>? encyclopedia = null;
@@ -36,6 +49,11 @@ public class CrossWordApiClient
         return encyclopedia?.ToArray() ?? [];
     }
 
+    /// <summary>
+    /// Posts the words and gets the generated grid back.
+    /// </summary>
+    /// <param name="words">The words that will be used to generate the crossword.</param>
+    /// <returns>The generated Crossword in the format of <see cref="CrosswordGrid"/></returns>
     public async Task<CrosswordGrid> PostWordsGetGrid (CrosswordWord [] words)
     {
         var response = await _httpClient.PostAsJsonAsync("/Crossword", words);
@@ -45,7 +63,11 @@ public class CrossWordApiClient
         return result;
 
     }
-
+    /// <summary>
+    /// Gets the closest word.
+    /// </summary>
+    /// <param name="input">The input.</param>
+    /// <returns>A list of type <see cref="CrosswordWord"/></returns>
     public async Task<List<CrosswordWord>> GetClosestWord (string input)
     {
         List<CrosswordWord>? words = null;

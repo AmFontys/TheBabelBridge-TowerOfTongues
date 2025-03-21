@@ -9,11 +9,11 @@ namespace BBTT.CrosswordCore;
 
 public class CrosswordGenerator : ICrosswordGenerator
 {
-    private Dictionary<(int x, int y), char> grid;
+    private Dictionary<(int x, int y), char>? grid;
 
     public async Task<Dictionary<(int x, int y), char>> ConstructCrossword (CrosswordWord [] words, CancellationToken cancellationToken)
     {
-        grid = new Dictionary<(int x, int y), char>();
+        grid = [];
         Random random = new Random();
         words = words.OrderBy(x => random.Next()).ToArray(); // Shuffle the words
 
@@ -21,7 +21,7 @@ public class CrosswordGenerator : ICrosswordGenerator
         var firstWord = words [ 0 ];
         var x = 0;
         var y = 0;
-        PlaceOnGrid(firstWord, x, y);
+        await PlaceOnGrid(firstWord, x, y);
 
         // Place the rest of the words
         for (int i = 1; i < words.Length; i++)
@@ -40,8 +40,13 @@ public class CrosswordGenerator : ICrosswordGenerator
         return grid;
     }
 
-    private void PlaceOnGrid (CrosswordWord word, int x, int y)
+    private Task PlaceOnGrid (CrosswordWord word, int x, int y)
     {
+        if(word.Word == null)
+        {
+            throw new ArgumentNullException(nameof(word));
+        }        
+
         if (word.Direction == "ACROSS")
         {
             for (int i = 0; i < word.Word.Length; i++)
@@ -56,6 +61,7 @@ public class CrosswordGenerator : ICrosswordGenerator
                 grid [ (x, y + i) ] = word.Word [ i ];
             }
         }
+        return Task.CompletedTask;
     }
 
     private bool TryPlaceWord (CrosswordWord word)
@@ -123,57 +129,63 @@ public class CrosswordGenerator : ICrosswordGenerator
     {
         if (word.Direction == "ACROSS")
         {
-            for (int i = 0; i < word.Word.Length; i++)
-            {
-                if (grid.ContainsKey((x + i, y)) && grid [ (x + i, y) ] != word.Word [ i ])
-                {
-                    return false;
-                }
-                if (grid.ContainsKey((x + i, y - 1)) || grid.ContainsKey((x + i, y + 1)))
-                {
-                    if (!grid.ContainsKey((x + i, y)) || grid [ (x + i, y) ] != word.Word [ i ])
-                    {
-                        return false;
-                    }
-                }
-                if (i > 0 && grid.ContainsKey((x + i - 1, y)) && grid [ (x + i - 1, y) ] != word.Word [ i - 1 ])
-                {
-                    return false;
-                }
-                if (i < word.Word.Length - 1 && grid.ContainsKey((x + i + 1, y)) && grid [ (x + i + 1, y) ] != word.Word [ i + 1 ])
-                {
-                    return false;
-                }
-
-            }
+            CanPlaceWordAcross(word, x, y);
         }
         else
         {
-            for (int i = 0; i < word.Word.Length; i++)
-            {
-                if (grid.ContainsKey((x, y + i)) && grid [ (x, y + i) ] != word.Word [ i ])
-                {
-                    return false;
-                }
-                if (grid.ContainsKey((x - 1, y + i)) || grid.ContainsKey((x + 1, y + i)))
-                {
-                    if (!grid.ContainsKey((x, y + i)) || grid [ (x, y + i) ] != word.Word [ i ])
-                    {
-                        return false;
-                    }
-                }
-                if (i > 0 && grid.ContainsKey((x, y + i - 1)) && grid [ (x, y + i - 1) ] != word.Word [ i - 1 ])
-                {
-                    return false;
-                }
-                if (i < word.Word.Length - 1 && grid.ContainsKey((x, y + i + 1)) && grid [ (x, y + i + 1) ] != word.Word [ i + 1 ])
-                {
-                    return false;
-                }
-
-            }
+            CanPlaceWordDown(word, x, y);
         }
 
+        return true;
+    }
+
+    private bool CanPlaceWordAcross (CrosswordWord word, int x, int y)
+    {
+        for (int i = 0; i < word.Word.Length; i++)
+        {
+            if (grid.ContainsKey((x + i, y)) && grid [ (x + i, y) ] != word.Word [ i ])
+            {
+                return false;
+            }
+            if ((grid.ContainsKey((x + i, y - 1)) || grid.ContainsKey((x + i, y + 1))) && (!grid.ContainsKey((x + i, y)) || grid [ (x + i, y) ] != word.Word [ i ]))
+            {
+                return false;
+            }
+            if (i > 0 && grid.ContainsKey((x + i - 1, y)) && grid [ (x + i - 1, y) ] != word.Word [ i - 1 ])
+            {
+                return false;
+            }
+            if (i < word.Word.Length - 1 && grid.ContainsKey((x + i + 1, y)) && grid [ (x + i + 1, y) ] != word.Word [ i + 1 ])
+            {
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+    private bool CanPlaceWordDown(CrosswordWord word, int x, int y)
+    {
+        for (int i = 0; i < word.Word.Length; i++)
+        {
+            if (grid.ContainsKey((x, y + i)) && grid [ (x, y + i) ] != word.Word [ i ])
+            {
+                return false;
+            }
+            if ((grid.ContainsKey((x - 1, y + i)) || grid.ContainsKey((x + 1, y + i))) && (!grid.ContainsKey((x, y + i)) || grid [ (x, y + i) ] != word.Word [ i ]))
+            {
+                return false;
+            }
+            if (i > 0 && grid.ContainsKey((x, y + i - 1)) && grid [ (x, y + i - 1) ] != word.Word [ i - 1 ])
+            {
+                return false;
+            }
+            if (i < word.Word.Length - 1 && grid.ContainsKey((x, y + i + 1)) && grid [ (x, y + i + 1) ] != word.Word [ i + 1 ])
+            {
+                return false;
+            }
+
+        }
         return true;
     }
 }

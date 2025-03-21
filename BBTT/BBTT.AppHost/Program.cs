@@ -23,4 +23,4 @@ builder.AddProject<Projects.BBTT_Web>("webfrontend")
     .WaitFor(dataApi);
 
 
-builder.Build().Run();
+await builder.Build().RunAsync();

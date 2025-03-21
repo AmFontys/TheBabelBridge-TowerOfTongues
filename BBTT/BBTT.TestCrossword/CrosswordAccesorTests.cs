@@ -5,95 +5,94 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace BBTT.TestCrossword
+namespace BBTT.TestCrossword;
+
+public class CrosswordAccesorTests
 {
-    public class CrosswordAccesorTests
+    private MockRepository mockRepository;
+
+    private Mock<ICrosswordGenerator> mockCrosswordGenerator;
+
+    public CrosswordAccesorTests()
     {
-        private MockRepository mockRepository;
+        this.mockRepository = new MockRepository(MockBehavior.Strict);
 
-        private Mock<ICrosswordGenerator> mockCrosswordGenerator;
+        this.mockCrosswordGenerator = this.mockRepository.Create<ICrosswordGenerator>();
+    }
 
-        public CrosswordAccesorTests()
-        {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
+    private CrosswordAccesor CreateCrosswordAccesor()
+    {
+        return new CrosswordAccesor(
+            this.mockCrosswordGenerator.Object);
+    }
 
-            this.mockCrosswordGenerator = this.mockRepository.Create<ICrosswordGenerator>();
-        }
+    [Fact]
+    public void AddBlankValuesToGrid_StateUnderTest_ExpectedBehavior()
+    {
+        // Arrange
+        var crosswordAccesor = this.CreateCrosswordAccesor();
+        CrosswordGrid resultGrid = null;
 
-        private CrosswordAccesor CreateCrosswordAccesor()
-        {
-            return new CrosswordAccesor(
-                this.mockCrosswordGenerator.Object);
-        }
+        // Act
+        var result = crosswordAccesor.AddBlankValuesToGrid(
+            resultGrid);
 
-        [Fact]
-        public void AddBlankValuesToGrid_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var crosswordAccesor = this.CreateCrosswordAccesor();
-            CrosswordGrid resultGrid = null;
+        // Assert
+        Assert.True(false);
+        this.mockRepository.VerifyAll();
+    }
 
-            // Act
-            var result = crosswordAccesor.AddBlankValuesToGrid(
-                resultGrid);
+    [Fact]
+    public async Task ConstructCrossword_StateUnderTest_ExpectedBehavior()
+    {
+        // Arrange
+        var crosswordAccesor = this.CreateCrosswordAccesor();
+        CrosswordWord[] words = null;
+        CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
+        // Act
+        var result = await crosswordAccesor.ConstructCrossword(
+            words,
+            cancellationToken);
 
-        [Fact]
-        public async Task ConstructCrossword_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var crosswordAccesor = this.CreateCrosswordAccesor();
-            CrosswordWord[] words = null;
-            CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
+        // Assert
+        Assert.True(false);
+        this.mockRepository.VerifyAll();
+    }
 
-            // Act
-            var result = await crosswordAccesor.ConstructCrossword(
-                words,
-                cancellationToken);
+    [Fact]
+    public async Task ConstructCrossword_StateUnderTest_ExpectedBehavior1()
+    {
+        // Arrange
+        var crosswordAccesor = this.CreateCrosswordAccesor();
+        CrosswordWord[] verticalWords = null;
+        CrosswordWord[] horizantalWords = null;
+        CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
+        // Act
+        var result = await crosswordAccesor.ConstructCrossword(
+            verticalWords,
+            horizantalWords,
+            cancellationToken);
 
-        [Fact]
-        public async Task ConstructCrossword_StateUnderTest_ExpectedBehavior1()
-        {
-            // Arrange
-            var crosswordAccesor = this.CreateCrosswordAccesor();
-            CrosswordWord[] verticalWords = null;
-            CrosswordWord[] horizantalWords = null;
-            CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
+        // Assert
+        Assert.True(false);
+        this.mockRepository.VerifyAll();
+    }
 
-            // Act
-            var result = await crosswordAccesor.ConstructCrossword(
-                verticalWords,
-                horizantalWords,
-                cancellationToken);
+    [Fact]
+    public async Task GetCrosswordGrid_StateUnderTest_ExpectedBehavior()
+    {
+        // Arrange
+        var crosswordAccesor = this.CreateCrosswordAccesor();
+        int id = 0;
 
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
+        // Act
+        var result = await crosswordAccesor.GetCrosswordGrid(
+            id);
 
-        [Fact]
-        public async Task GetCrosswordGrid_StateUnderTest_ExpectedBehavior()
-        {
-            // Arrange
-            var crosswordAccesor = this.CreateCrosswordAccesor();
-            int id = 0;
-
-            // Act
-            var result = await crosswordAccesor.GetCrosswordGrid(
-                id);
-
-            // Assert
-            Assert.True(false);
-            this.mockRepository.VerifyAll();
-        }
+        // Assert
+        Assert.True(false);
+        this.mockRepository.VerifyAll();
     }
 }
