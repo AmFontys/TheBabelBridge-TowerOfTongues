@@ -71,7 +71,7 @@ This document is about what I'm planning todo and what kind of research I could 
   - Ranking board
   - Match / tournament
   - Sharing puzzles
-- Best way to include dependcy injection (DI) into the project.
+- Best way to include dependency injection (DI) into the project.
   - Just use Microsoft's DI
   - Use others DI
 - What should I use XUnit, NUnit or MSTest
