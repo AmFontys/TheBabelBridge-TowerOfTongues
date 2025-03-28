@@ -1,4 +1,5 @@
 using BBTT.CrosswordCore;
+using BBTT.Files;
 
 namespace BBTT.CrosswordAPI;
 
@@ -20,6 +21,7 @@ public class Program
         //Depency Injection (DI)
         builder.Services.AddSingleton<ICrosswordGenerator, CrosswordGenerator>();
         builder.Services.AddSingleton<ICrosswordAccesor, CrosswordAccesor>();
+        builder.Services.AddSingleton<ICsvReaderAcessor, CsvReaderAcessor>();
 
         var app = builder.Build();
         app.UseExceptionHandler();

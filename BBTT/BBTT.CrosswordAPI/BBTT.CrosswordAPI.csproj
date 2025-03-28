@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BBTT.CrosswordCore\BBTT.CrosswordCore.csproj" />
     <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
+    <ProjectReference Include="..\BBTT.Files\BBTT.Files.csproj" />
     <ProjectReference Include="..\BBTT.ServiceDefaults\BBTT.ServiceDefaults.csproj" />
   </ItemGroup>
 

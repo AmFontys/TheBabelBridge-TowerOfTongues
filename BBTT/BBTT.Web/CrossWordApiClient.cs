@@ -1,7 +1,9 @@
 ﻿using BBTT.CrosswordModel;
+using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -78,5 +80,24 @@ public class CrossWordApiClient
         return words;
     }
 
+    public async Task<List<CrosswordWord>> ReadCsvFile (IBrowserFile? input)
+    {
+        List<CrosswordWord>? words = null;
 
+        if (input != null)
+        {
+            using var content = new MultipartFormDataContent();
+            var fileContent = new StreamContent(input.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15)); // Adjust max size as needed
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(input.ContentType);
+            content.Add(fileContent, "input", input.Name); // Ensure the name matches the API parameter
+
+            var response = await _httpClient.PostAsync("/readcsv", content);
+            if (response.IsSuccessStatusCode)
+            {
+                words = await response.Content.ReadFromJsonAsync<List<CrosswordWord>>();
+            }
+        }
+
+        return words;
+    }
 }
