@@ -22,6 +22,18 @@ builder.Services.AddHttpClient<DataApiClient>(client =>
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 
+builder.Services.AddHttpClient<object>(client =>
+{
+    client.BaseAddress = new("https+http://user");
+    client.Timeout = TimeSpan.FromMinutes(5);
+});
+
+builder.Services.AddHttpClient<object>(client =>
+{
+    client.BaseAddress = new("https+http://employee");
+    client.Timeout = TimeSpan.FromMinutes(5);
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

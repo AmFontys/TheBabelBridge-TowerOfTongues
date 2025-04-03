@@ -1,5 +1,5 @@
-﻿@using BBTT.CrosswordModel;
-<h3>CroswordLayout</h3>
+﻿@using BBTT.CrosswordModel
+<h3>Crossword Layout</h3>
 
 @if (crossword.CrosswordGrid == null)
 {
@@ -13,7 +13,7 @@ else
     var minY = crossword.CrosswordGrid.GridEntries.Min(e => e.Column);
     var maxY = crossword.CrosswordGrid.GridEntries.Max(e => e.Column);
 
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
             @for (int x = minX; x <= maxX; x++)
             {
@@ -22,17 +22,14 @@ else
                     {
                         @if (crossword.CrosswordGrid.GridEntries.FirstOrDefault(e => e.Row == x && e.Column == y) is GridEntry entry)
                         {
-                            if(entry.Value.Equals(char.Parse("@"))){
+                            if (entry.Value.Equals('@'))
+                            {
                                 <td class="bg-dark"></td>
                             }
-                            else if(!IsPlayed){
+                            else
+                            {
                                 <td>
-                                    <input type="text" maxlength="1" class="form-control" @bind="entry.Value" disabled />
-                                </td>
-                            }
-                            else{
-                                <td>                                    
-                                    <input type="text" maxlength="1" class="form-control" @bind="entry.Value" />
+                                    <input type="text" maxlength="1" class="form-control" @bind="entry.Value" disabled="@(IsPlayed ? false : true)" aria-label="Crossword cell" />
                                 </td>
                             }
                         }
@@ -53,7 +50,7 @@ else
             <div class="form-group row">
                 <label for="description" class="col-4 col-form-label">Description</label>
                 <div class="col-8">
-                    <textarea id="description" name="description" cols="40" rows="5" required="required" class="form-control" @bind="crossword.Description" />
+                    <textarea id="description" name="description" cols="40" rows="5" required="required" class="form-control" @bind="crossword.Description"></textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -62,7 +59,7 @@ else
                 </div>
             </div>
         </div>
-    }    
+    }
 }
 @code {
     [Parameter]
@@ -89,7 +86,7 @@ else
                 if (gridEntry.Value != char.Parse("@"))
                 {
                     gridEntry.Value = char.Parse("?");
-                }                
+                }
             }
         }
     }

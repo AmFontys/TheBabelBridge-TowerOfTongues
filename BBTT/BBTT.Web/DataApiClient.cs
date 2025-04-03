@@ -33,6 +33,15 @@ public class DataApiClient
         CrosswordGrid? result = await response.Content.ReadFromJsonAsync<CrosswordGrid>();
         return result;
     }
+
+    public async Task<List<Crossword>> GetCrosswordsAsync ()
+    {
+        var response = await _httpClient.GetAsync("/Databaset");
+        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful        
+        List<Crossword>? result = await response.Content.ReadFromJsonAsync<List<Crossword>>();
+        return result;
+    }
+
     /// <summary>
     /// Saves the crossword.
     /// </summary>
