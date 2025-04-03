@@ -3,6 +3,7 @@
 @attribute [StreamRendering(true)]
 @* @attribute [OutputCache(Duration = 5)] *@
 @using BBTT.CrosswordModel;
+@using BBTT.Web.Components.ReUse;
 
 @inject CrossWordApiClient CrossWordApi
 @inject DataApiClient DataApi
@@ -60,56 +61,7 @@
 
 <button class="btn btn-success" @onclick="SendWordsForGeneration">Generate Crossword</button>
 
-@if (crossword.CrosswordGrid == null)
-{
-    <p>Not yet created</p>
-}
-else{
-    // Determine the bounds of the grid
-    var minX = crossword.CrosswordGrid.GridEntries.Min(e => e.Row);
-    var maxX = crossword.CrosswordGrid.GridEntries.Max(e => e.Row);
-    var minY = crossword.CrosswordGrid.GridEntries.Min(e => e.Column);
-    var maxY = crossword.CrosswordGrid.GridEntries.Max(e => e.Column);
-
-    <table class="table">
-        <tbody>
-            @for (int x = minX; x <= maxX; x++)
-            {
-                <tr>
-                    @for (int y = minY; y <= maxY; y++)
-                    {
-                        <td>
-                            @if (crossword.CrosswordGrid.GridEntries.FirstOrDefault(e => e.Row == x && e.Column == y) is GridEntry entry)
-                            {
-                                @entry.Value
-                            }
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <div>
-        <div class="form-group row">
-            <label for="title" class="col-4 col-form-label">Title</label>
-            <div class="col-8">
-                <input id="title" name="title" type="text" required="required" class="form-control" @bind="crossword.Name">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="description" class="col-4 col-form-label">Description</label>
-            <div class="col-8">
-                <textarea id="description" name="description" cols="40" rows="5" required="required" class="form-control" @bind="crossword.Description" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="offset-4 col-8">
-                <button class="btn btn-primary" @onclick="SendToDatabase">Save Crossword</button>
-            </div>
-        </div>
-    </div>
-}
+<CroswordLayout crossword="crossword" OnCrosswordUpdated="SendToDatabase" IsPlayed="false"/>
 
 @code {
     private CrosswordWord[]? crosswords;

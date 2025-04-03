@@ -1,0 +1,96 @@
+﻿@using BBTT.CrosswordModel;
+<h3>CroswordLayout</h3>
+
+@if (crossword.CrosswordGrid == null)
+{
+    <p>Not yet created</p>
+}
+else
+{
+    // Determine the bounds of the grid
+    var minX = crossword.CrosswordGrid.GridEntries.Min(e => e.Row);
+    var maxX = crossword.CrosswordGrid.GridEntries.Max(e => e.Row);
+    var minY = crossword.CrosswordGrid.GridEntries.Min(e => e.Column);
+    var maxY = crossword.CrosswordGrid.GridEntries.Max(e => e.Column);
+
+    <table class="table">
+        <tbody>
+            @for (int x = minX; x <= maxX; x++)
+            {
+                <tr>
+                    @for (int y = minY; y <= maxY; y++)
+                    {
+                        @if (crossword.CrosswordGrid.GridEntries.FirstOrDefault(e => e.Row == x && e.Column == y) is GridEntry entry)
+                        {
+                            if(entry.Value.Equals(char.Parse("@"))){
+                                <td class="bg-dark"></td>
+                            }
+                            else if(!IsPlayed){
+                                <td>
+                                    <input type="text" maxlength="1" class="form-control" @bind="entry.Value" disabled />
+                                </td>
+                            }
+                            else{
+                                <td>                                    
+                                    <input type="text" maxlength="1" class="form-control" @bind="entry.Value" />
+                                </td>
+                            }
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (OnCrosswordUpdated.HasDelegate)
+    {
+        <div>
+            <div class="form-group row">
+                <label for="title" class="col-4 col-form-label">Title</label>
+                <div class="col-8">
+                    <input id="title" name="title" type="text" required="required" class="form-control" @bind="crossword.Name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-4 col-form-label">Description</label>
+                <div class="col-8">
+                    <textarea id="description" name="description" cols="40" rows="5" required="required" class="form-control" @bind="crossword.Description" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <button class="btn btn-primary" @onclick="SendToDatabase">Save Crossword</button>
+                </div>
+            </div>
+        </div>
+    }    
+}
+@code {
+    [Parameter]
+    public required bool IsPlayed { get; set; } = false;
+
+    [Parameter]
+    public required Crossword crossword { get; set; }
+    [Parameter]
+    public EventCallback<Crossword> OnCrosswordUpdated { get; set; }
+    private async Task SendToDatabase()
+    {
+        await OnCrosswordUpdated.InvokeAsync(crossword);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (crossword == null || crossword.CrosswordGrid == null)
+            return;
+
+        if (IsPlayed)
+        {
+            foreach (var gridEntry in crossword.CrosswordGrid.GridEntries)
+            {
+                if (gridEntry.Value != char.Parse("@"))
+                {
+                    gridEntry.Value = char.Parse("?");
+                }                
+            }
+        }
+    }
+}
