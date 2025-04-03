@@ -8,15 +8,15 @@ It can be that some other need to be implemented first to have it available on t
 |Generation| Crossword Generation | &#x2611; | You can generate a simple crossword puzzle |
 |Generation|Multi-lang Generation|&#x2611;|You can create a crossword with multiple languages and alphabets but not together|
 |Database|Save Crossword|&#x2611;| Save the generated crossword into the database|
-|Database|Retrieve Crossword|&#x2612;| Get the saved generated crossword|
-|Crossword|Show Crosswords|&#x2612;| Show all possible crosswords that can be played|
-|Crossword|Play Crossword|&#x2612;| Play a specif crossword|
+|Database|Retrieve Crossword|&#x2611;| Get the saved generated crossword|
+|Crossword|Show Crosswords|&#x2611;| Show all possible crosswords that can be played|
+|Crossword|Play Crossword|&#x2611;| Play a specif crossword|
 |Crossword|Finish Crossword|&#x2612;| Make it able to finish the crossword when everything is filled in |
 |Crossword| Multiplayer small|&#x2612;| Be able to at least connect with 2 people on the same crossword|
 |Lang| Multi lang app|&#x2612;| Be able to switch languages of the interface/Frontend|
 |Crossword|Hints on the crossword|&#x2612;| Be able to see the hints on the crossword with the numbers|
 |Cloud|Cloud site|&#x2611;| Have the entire application be able to run in the cloud|
-|Generation|File Generation|&#x2612;| A player can give a (csv) file with all the words and directions they specify and based on that generate the crossword |
+|Generation|File Generation|&#x2611;| A player can give a (csv) file with all the words and directions they specify and based on that generate the crossword |
 |Security|Only auth functions|&#x2612;|Make it so only when logged in or being an employee certain functions can be executed|
 |Database|Database Que|&#x2612;|When adding or retrieving data wait for it on a que so downtown of entering data won't happen easily|
 |Security|Two-Factor Authentication|&#x2612;|Add two-factor authentication for enhanced account security|
@@ -41,7 +41,7 @@ It can be that some other need to be implemented first to have it available on t
 |Account|Account settings|&#x2612;| Make the user be able to do settings like recommended language, color of background, etc.|
 |Generation|Multi-Alp Generation|&#x2612;| You can use multiple alphabets to generate a crossword|
 |Crossword|Tournament style|&#x2612;| Make a tournament where people can sign up for or only specif people/users and play a tournament where a series of crosswords will be played against each other in one-vs-one style|
-|Accessability|Make website accessible|&#x2612;|Make sure that the entire website is accessible|
+|Accessability|Make website accessible|&#x2615;|Make sure that the entire website is accessible|
 |Database| Save game|&#x2612;|Save a players crossword that they played|
 |Database|Retrieve game|&#x2612;| Retrieve a players crossword that they played|
 |Cloud|Auto shutdown|&#x2612;| Make it so the cloud shutdowns automatically|
