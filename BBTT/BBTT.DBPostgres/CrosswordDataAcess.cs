@@ -21,15 +21,23 @@ public class CrosswordDataAcess : ICrosswordDataAccess
             Name = crossword.Name,
             Description = crossword.Description,
             Tags = crossword.Tags,
+            CrosswordGrid = new CrosswordGridDto()
+            {
+                GridEntries = new List<GridEntryDTO>(),
+            },
         };
-        await _pgsqlDbContext.Crossword.AddAsync(crosswordDto);        
+        await _pgsqlDbContext.Crosswords.AddAsync(crosswordDto);        
         await _pgsqlDbContext.SaveChangesAsync();
         return crosswordDto.Id;
     }
 
-    public async Task<CrosswordDto> GetCrossword (int id)
+    public async Task<CrosswordDto> GetCrossword(int id)
     {
-        return await _pgsqlDbContext.Crossword.FindAsync(id);
+        var result = await _pgsqlDbContext.Crosswords
+            .Include(c => c.CrosswordGrid)
+            .ThenInclude(g => g.GridEntries)
+            .FirstOrDefaultAsync(c => c.Id == id);
+        return result;
     }
 
     public async Task<int> CreateCrosswordGrid (int id, CrosswordGrid crosswordGrid)
@@ -51,7 +59,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         }
         try
         {
-            await _pgsqlDbContext.CrosswordGrid.AddAsync(crosswordGridDto);
+            await _pgsqlDbContext.CrosswordGrids.AddAsync(crosswordGridDto);
             await _pgsqlDbContext.SaveChangesAsync();
             return crosswordGridDto.Id;
         }
@@ -67,7 +75,52 @@ public class CrosswordDataAcess : ICrosswordDataAccess
     
     public async Task<CrosswordDto> GetCrossword (Crossword crosswordDto)
     {
-        var result = await _pgsqlDbContext.Crossword.FindAsync(crosswordDto);
+        var result = await _pgsqlDbContext.Crosswords.FindAsync(crosswordDto);
+        return result;
+    }
+
+    public Task<List<CrosswordDto>> GetCrosswords ()
+    {
+        var result = _pgsqlDbContext.Crosswords.ToListAsync();
+        return result;
+    }
+
+    public Crossword MapCrosswords (CrosswordDto crossword)
+    {
+        Crossword _mappedCrossword = new()
+        {            
+            Name = crossword.Name,
+            Description = crossword.Description,
+            Tags = crossword.Tags != null ? crossword.Tags : new List<string>() { "None"},
+            CrosswordGrid = crossword.CrosswordGrid != null ? new CrosswordGrid()
+            {
+                GridEntries = crossword.CrosswordGrid.GridEntries.Select(x => new GridEntry()
+                {
+                    Row = x.Row,
+                    Column = x.Column,
+                    Value = x.Value,
+                }).ToList(),
+            } : null,
+        };
+        return _mappedCrossword;
+    }
+
+    public List<Crossword> MapCrosswords (List<CrosswordDto> crosswords)
+    {
+        List<Crossword> _mappedCrosswords = new();
+        foreach (var crossword in crosswords)
+        {
+            _mappedCrosswords.Add(MapCrosswords(crossword));
+        }
+        return _mappedCrosswords;
+    }
+
+    public Task<CrosswordDto> GetCrossword (string name)
+    {
+        var result = _pgsqlDbContext.Crosswords
+            .Include(c => c.CrosswordGrid)
+            .ThenInclude(g => g.GridEntries)
+            .FirstOrDefaultAsync(c => c.Name == name);
         return result;
     }
 }

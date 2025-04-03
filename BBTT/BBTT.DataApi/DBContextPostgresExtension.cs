@@ -10,17 +10,21 @@ public static class DBContextPostgresExtension
     {
         app.MapGet("/testConnection", async (DbContextPostgres pgsqlDbContext) =>
         {
-            await pgsqlDbContext.Crossword.AddAsync(new CrosswordDto()
+            await pgsqlDbContext.Crosswords.AddAsync(new CrosswordDto()
             {
                 Name = "Test",
                 Description = "Test",
                 Tags = new List<string>() { "Test" },
+                CrosswordGrid = new CrosswordGridDto()
+                {
+                    GridEntries = new List<GridEntryDTO>(),
+                },
 
             });
             int rows = await pgsqlDbContext.SaveChangesAsync();
             if (rows > 0)
             {
-                return await pgsqlDbContext.Crossword.FirstOrDefaultAsync();
+                return await pgsqlDbContext.Crosswords.FirstOrDefaultAsync();
             }
             else
             {

@@ -5,21 +5,23 @@ namespace BBTT.DBModels;
 
 public class DbContextPostgres : DbContext
 {
-    public DbContextPostgres (DbContextOptions options) : base(options) { }
+    public DbContextPostgres(DbContextOptions options) : base(options) { }
 
-    public DbSet<CrosswordDto> Crossword => Set<CrosswordDto>();
-    public DbSet<CrosswordGridDto> CrosswordGrid => Set<CrosswordGridDto>();
-    public DbSet<GridEntryDTO> CrosswordGridEntry => Set<GridEntryDTO>();
+    public DbSet<CrosswordDto> Crosswords => Set<CrosswordDto>();
+    public DbSet<CrosswordGridDto> CrosswordGrids => Set<CrosswordGridDto>();
+    public DbSet<GridEntryDTO> CrosswordGridEntries => Set<GridEntryDTO>();
 
-    protected override void OnModelCreating (ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<CrosswordGridDto>()
-            .HasMany(c => c.GridEntries)
-            .WithOne()
-            .HasForeignKey(e => e.CrosswordGridId);
+        modelBuilder.Entity<CrosswordDto>()
+            .HasOne(c => c.CrosswordGrid)
+            .WithOne(g => g.Crossword)
+            .HasForeignKey<CrosswordGridDto>(g => g.CrosswordId);
 
-        modelBuilder.Entity<GridEntryDTO>()
-            .HasKey(e => new { e.Row, e.Column, e.CrosswordGridId });
+        modelBuilder.Entity<CrosswordGridDto>()
+            .HasMany(g => g.GridEntries)
+            .WithOne(e => e.CrosswordGrid)
+            .HasForeignKey(e => e.CrosswordGridId);
 
         base.OnModelCreating(modelBuilder);
     }

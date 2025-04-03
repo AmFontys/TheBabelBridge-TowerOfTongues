@@ -1,7 +1,7 @@
 ﻿@using BBTT.CrosswordModel
 <h3>Crossword Layout</h3>
 
-@if (crossword.CrosswordGrid == null)
+@if (crossword == null || crossword.CrosswordGrid == null)
 {
     <p>Not yet created</p>
 }

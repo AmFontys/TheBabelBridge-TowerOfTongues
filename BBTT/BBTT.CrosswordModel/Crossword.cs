@@ -1,5 +1,8 @@
 ﻿namespace BBTT.CrosswordModel;
 
+/// <summary>
+/// Crossword puzzle model.
+/// </summary>
 public class Crossword
 {
     public string Name { get; set; } = "";

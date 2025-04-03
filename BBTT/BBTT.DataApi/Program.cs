@@ -4,6 +4,7 @@ using BBTT.DBModels;
 using BBTT.DBPostgres;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+using System.Text.Json.Serialization;
 
 namespace BBTT.DataApi;
 
@@ -19,7 +20,11 @@ public class Program
         builder.Services.AddDbContext<DbContextPostgres>();
         builder.Services.AddScoped<ICrosswordDataAccess, CrosswordDataAcess>();
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers()
+             .AddJsonOptions(options =>
+             {
+                 //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+             });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

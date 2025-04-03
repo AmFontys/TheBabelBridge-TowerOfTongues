@@ -1,0 +1,30 @@
+﻿@page "/crossword/{name}"
+@rendermode InteractiveServer
+@attribute [StreamRendering(false)]
+@* @attribute [OutputCache(Duration = 5)] *@
+@using BBTT.CrosswordModel;
+@using BBTT.Web.Components.ReUse;
+
+@inject CrossWordApiClient CrossWordApi;
+@inject DataApiClient DataApi;
+
+<PageTitle>Crossword @name</PageTitle>
+
+<a class="btn btn-primary" href="/crosswords">Back</a>
+<CroswordLayout crossword="crossword" IsPlayed="true" />
+
+@code {
+    [Parameter]
+    public string? name { get; set; } = "";
+
+    private Crossword? crossword = new();
+
+    protected override async Task OnInitializedAsync() => crossword = await LoadCrosswordFromDB(name);
+   
+
+    public async Task<Crossword> LoadCrosswordFromDB(string name)
+    {
+         return await DataApi.GetCrosswordAsync(name);        
+    }
+
+}

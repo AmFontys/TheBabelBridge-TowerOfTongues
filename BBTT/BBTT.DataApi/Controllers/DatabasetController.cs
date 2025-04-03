@@ -29,4 +29,35 @@ public class DatabasetController : ControllerBase
         return Ok();
        
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllCrosswords ()
+    {
+        var crosswords = await _crosswordDataAcess.GetCrosswords();
+        List<Crossword> returnList = _crosswordDataAcess.MapCrosswords(crosswords);
+        if (crosswords == null)
+            return NotFound();
+        return Ok(returnList);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCrossword (int id)
+    {
+        var crossword = await _crosswordDataAcess.GetCrossword(id);        
+        var mapCrossword = _crosswordDataAcess.MapCrosswords(crossword);
+        if (crossword == null)
+            return NotFound();
+        return Ok(mapCrossword);
+    }
+
+    [HttpGet("{name}/get")]
+    public async Task<IActionResult> GetCrosswordByName (string name)
+    {
+        var crossword = await _crosswordDataAcess.GetCrossword(name);
+        var mapCrossword = _crosswordDataAcess.MapCrosswords(crossword);
+        if (crossword == null)
+            return NotFound();
+        return Ok(mapCrossword);
+    }
+
 }

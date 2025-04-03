@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,11 @@ public class CrosswordDto
     [Required]
     public required string Name { get; set; }
 
-    [MaxLength(500)]    
+    [MaxLength(500)]
     public string? Description { get; set; }
 
     public List<string>? Tags { get; set; }
+
+    [Required]
+    public required CrosswordGridDto CrosswordGrid { get; set; }
 }

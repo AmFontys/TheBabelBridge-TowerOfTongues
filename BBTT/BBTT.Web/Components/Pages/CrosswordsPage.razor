@@ -1,0 +1,54 @@
+﻿@page "/crosswords"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+@* @attribute [OutputCache(Duration = 5)] *@
+@using BBTT.CrosswordModel;
+@using BBTT.Web.Components.ReUse;
+
+@inject CrossWordApiClient CrossWordApi
+@inject DataApiClient DataApi
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crosswords</PageTitle>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Tags</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(_crosswords !=null){
+            @foreach (var word in _crosswords)
+            {
+
+                <tr @onclick="()=>sendToPlayPage(word.Name)">
+                    <td>@word.Name</td>
+                    <td>@word.Description</td>
+                    <td>@foreach (var tag in @word.Tags) { @tag}</td>
+                </tr>        
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private Crossword[]? _crosswords = null;
+
+
+    protected override async Task OnInitializedAsync() => _crosswords = await LoadCrosswordsFromDB();
+
+    private async Task<Crossword[]> LoadCrosswordsFromDB()
+    {
+        var crosswordList = await DataApi.GetCrosswordsAsync();
+        return crosswordList.ToArray();
+    }
+
+    private async Task sendToPlayPage(string name)
+    {
+        NavigationManager.NavigateTo($"/crossword/{name}");
+        await Task.CompletedTask;
+    }
+}

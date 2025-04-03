@@ -1,6 +1,7 @@
 ﻿using BBTT.CrosswordAPI.Controllers;
 using BBTT.CrosswordCore;
 using BBTT.CrosswordModel;
+using BBTT.Files;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -16,6 +17,7 @@ namespace BBTT.TestCrossword.Controllers
 
         private Mock<ILogger<CrosswordController>> mockLogger;
         private Mock<ICrosswordAccesor> mockCrosswordAccesor;
+        private Mock<ICsvReaderAcessor> mockCsvReaderAcessor;
 
         public CrosswordControllerTests()
         {
@@ -29,7 +31,8 @@ namespace BBTT.TestCrossword.Controllers
         {
             return new CrosswordController(
                 this.mockLogger.Object,
-                this.mockCrosswordAccesor.Object);
+                this.mockCrosswordAccesor.Object,
+                this.mockCsvReaderAcessor.Object);
         }
 
         [Fact]

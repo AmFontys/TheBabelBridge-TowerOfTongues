@@ -190,5 +190,6 @@
     private async Task HandleFileSelected(InputFileChangeEventArgs e)
     {
         selectedFile = e.File;
+        await Task.CompletedTask;
     }
 }

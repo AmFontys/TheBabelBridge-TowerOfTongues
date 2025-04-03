@@ -34,12 +34,49 @@ public class DataApiClient
         return result;
     }
 
+    public async Task<Crossword> GetCrosswordAsync (string name)
+    {
+        var response = await _httpClient.GetAsync($"/Databaset/{name}/get");
+        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        try
+        {
+            Crossword? result = await response.Content.ReadFromJsonAsync<Crossword>();
+            if (result != null)
+            {
+                return result;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Gets the crosswords asynchronous.
+    /// </summary>
+    /// <returns>list of <see cref="Crossword"/> </returns>
     public async Task<List<Crossword>> GetCrosswordsAsync ()
     {
         var response = await _httpClient.GetAsync("/Databaset");
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful        
-        List<Crossword>? result = await response.Content.ReadFromJsonAsync<List<Crossword>>();
-        return result;
+        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        try
+        {
+            List<Crossword>? result = await response.Content.ReadFromJsonAsync<List<Crossword>>();
+            if (result.Count>0)
+            {
+                return result;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
+
+        return null;
     }
 
     /// <summary>

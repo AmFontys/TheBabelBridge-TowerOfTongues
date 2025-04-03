@@ -7,8 +7,10 @@ public class GridEntryDTO
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    [ForeignKey("CrosswordGridId")]
     public int CrosswordGridId { get; set; }
+
+    [ForeignKey("CrosswordGridId")]
+    public CrosswordGridDto CrosswordGrid { get; set; }
     [Required]
     public int Row { get; set; }
     [Required]
