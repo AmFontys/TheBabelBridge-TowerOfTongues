@@ -2,6 +2,16 @@
 
 How will I handle Graduation prep
 
+## My previous internship
+
+I worked at KSE in Bladel with the project that I should make some Templates that they can use in their company to create new modules easily and also transform from .net4.8 to .net8. Because of the .net4.8 was coming out of support.
+
+KSE is a company about making automated feeding machines and the application for it.  
+I found my Internship a bit of a mess because my internship leader/manager was newly born dad and didn't have the time for me on some days and also needed to leave early.  
+This was also the first time he had an intern under him and thus I had some minimal problems with that. Furthermore, they have an open office which I didn't like after everything and had not enough support to see how they want everything to be designed.  
+The people from Fontys also weren't that good as both the second assessor and the mentor where new to this so it filled me with uncertainty about how good i'm doing at the end everything was fine and I had a decent grade.  
+With the company in the first few weeks I didn't have the resources to me available to where I should work on and could only look through documents.
+
 ## What do I look for
 
 I look for a company where I can learn a lot from mostly with unknown technologies that I haven't used yet and industry. Furthermore, if it's something I already know then I can learn the various way on how it can be used. Be it good or bad it doesn't matter as long as I learn something from it.  
@@ -26,3 +36,5 @@ I started with looking through ASAM, the partner in education and then I looked 
 ## My time plan
 
 I don't have a concrete time plan as the current semester is also important and I mainly look at the first few pages of the company to know what they do before sending an email or fill in their form for vacancies. But my time plan is take an hour from either wednesday or thursday morning to look for companies and then 2 hours to act on the companies after a while to look at them critically again to make sure I want to stay at this company and what my main motivations for them are.
+
+So in short I give myself each week around 3 or more hours to find an internship and apply to them. What not is included is the time I take to do meet-ups with the companies and the travel time for them as this varies week by week. But that is the general plan.
