@@ -24,4 +24,7 @@ public class CrosswordDto
 
     [Required]
     public required CrosswordGridDto CrosswordGrid { get; set; }
+
+    [Required]
+    public List<CrosswordWordDTO> Words { get; set; } = new List<CrosswordWordDTO>();
 }

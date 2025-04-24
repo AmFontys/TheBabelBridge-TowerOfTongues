@@ -15,14 +15,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BBTT.ApiService\BBTT.ApiService.csproj" />
+    <ProjectReference Include="..\BBTT.AuthApi\BBTT.AuthApi.csproj" />
     <ProjectReference Include="..\BBTT.CrosswordAPI\BBTT.CrosswordAPI.csproj" />
     <ProjectReference Include="..\BBTT.DataApi\BBTT.DataApi.csproj" />
     <ProjectReference Include="..\BBTT.Web\BBTT.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.2.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.SignalR" Version="9.2.0" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.2.0" />
   </ItemGroup>
 
 </Project>

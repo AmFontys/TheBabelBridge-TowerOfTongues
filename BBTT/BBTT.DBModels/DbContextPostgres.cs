@@ -11,6 +11,8 @@ public class DbContextPostgres : DbContext
     public DbSet<CrosswordGridDto> CrosswordGrids => Set<CrosswordGridDto>();
     public DbSet<GridEntryDTO> CrosswordGridEntries => Set<GridEntryDTO>();
 
+    public DbSet<CrosswordWordDTO> CrosswordWords => Set<CrosswordWordDTO>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CrosswordDto>()
@@ -22,6 +24,13 @@ public class DbContextPostgres : DbContext
             .HasMany(g => g.GridEntries)
             .WithOne(e => e.CrosswordGrid)
             .HasForeignKey(e => e.CrosswordGridId);
+
+        modelBuilder.Entity<CrosswordDto>()
+        .HasMany(c => c.Words)
+        .WithOne()
+        .HasForeignKey(w => w.CrosswordId)
+        .OnDelete(DeleteBehavior.Cascade); // Optional: Configure cascade delete
+
 
         base.OnModelCreating(modelBuilder);
     }

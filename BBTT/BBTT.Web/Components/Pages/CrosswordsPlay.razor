@@ -6,25 +6,67 @@
 @using BBTT.Web.Components.ReUse;
 
 @inject CrossWordApiClient CrossWordApi;
-@inject DataApiClient DataApi;
+@inject AuthApiClient DataApi;
 
 <PageTitle>Crossword @name</PageTitle>
+<h1>Crossword @name</h1>
+<p> @message </p>
 
 <a class="btn btn-primary" href="/crosswords">Back</a>
-<CroswordLayout crossword="crossword" IsPlayed="true" />
+<CroswordLayout crossword="crossword" IsPlayed="CurrentlyPlaying" />
+
+<button class="btn btn-primary" @onclick="CompareCrossword" type="button">Check crossword</button>
 
 @code {
     [Parameter]
     public string? name { get; set; } = "";
 
     private Crossword? crossword = new();
+    private Crossword? crosswordUntouched = new();
 
-    protected override async Task OnInitializedAsync() => crossword = await LoadCrosswordFromDB(name);
-   
+    private bool CurrentlyPlaying;
+
+    private string? message = null;
+
+
+    protected override async Task OnInitializedAsync() {
+        CurrentlyPlaying = true;
+        crossword = await LoadCrosswordFromDB(name);
+        crosswordUntouched = crossword;
+    }
+
+
+
 
     public async Task<Crossword> LoadCrosswordFromDB(string name)
     {
-         return await DataApi.GetCrosswordAsync(name);        
+        return await DataApi.GetCrosswordAsync(name);        
     }
+    private async Task CompareCrossword()
+    {
+        List<bool> IsCorrect = new List<bool>();
+        foreach (GridEntry gridEntry in crossword.CrosswordGrid.GridEntries)
+        {
+            if(crosswordUntouched.CrosswordGrid.GridEntries
+                .FirstOrDefault(x => x.Row == gridEntry.Row && x.Column == gridEntry.Column)
+                .Value == gridEntry.Value){
+                IsCorrect.Add(true);
+            }
+            else{
+                IsCorrect.Add(false);
+            }
+        }
 
+        if (IsCorrect.All(x => x == true))
+        {
+            message = "Crossword is correct!";
+            crossword = crosswordUntouched;
+            CurrentlyPlaying = false;
+        }
+        else
+        {
+            message = "Crossword is incorrect!";
+        }       
+
+    }
 }

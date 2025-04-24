@@ -1,5 +1,7 @@
 using BBTT.Web;
 using BBTT.Web.Components;
+using BBTT.Web.Hubs;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Routing.Constraints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,14 +15,23 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddOutputCache();
+builder.Services.AddProblemDetails();
 
+#region HTTPClients
 builder.Services.AddHttpClient<CrossWordApiClient>(client =>
 {
-    client.BaseAddress = new("https+http://crosswordapi");    
+    client.BaseAddress = new("https+http://crosswordapi");
+    client.Timeout = TimeSpan.FromMinutes(5);
 });
 builder.Services.AddHttpClient<DataApiClient>(client =>
 {
     client.BaseAddress = new("https+http://bbtt-dataapi");
+    client.Timeout = TimeSpan.FromMinutes(5);
+});
+
+builder.Services.AddHttpClient<AuthApiClient>(client =>
+{
+    client.BaseAddress = new("https+http://bbtt-authapi");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 
@@ -35,6 +46,25 @@ builder.Services.AddHttpClient<object>(client =>
     client.BaseAddress = new("https+http://employee");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
+
+#endregion
+
+#region SignalR
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+        new [] { "application/octet-stream" });
+});
+
+//builder.Services.AddSignalR(options =>
+//{
+//    options.EnableDetailedErrors = true;
+//    options.MaximumReceiveMessageSize = 1024 * 1024 * 10; // 10 MB
+//    options.MaximumParallelInvocationsPerClient = 10;    
+//});
+
+#endregion
 
 var app = builder.Build();
 
@@ -56,5 +86,8 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.MapDefaultEndpoints();
+
+//app.MapBlazorHub("/app");
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();

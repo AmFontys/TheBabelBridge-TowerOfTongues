@@ -24,12 +24,12 @@ else
                         {
                             if (entry.Value.Equals('@'))
                             {
-                                <td class="bg-dark"></td>
+                                <td class="bg-dark crossword-cell"></td>
                             }
                             else
                             {
-                                <td>
-                                    <input type="text" maxlength="1" class="form-control" @bind="entry.Value" disabled="@(IsPlayed ? false : true)" aria-label="Crossword cell" />
+                                <td class="crossword-cell">
+                                    <input type="text" maxlength="1" class="crossword-cell" @bind="entry.Value" disabled="@(IsPlayed ? false : true)" aria-label="Crossword cell" />
                                 </td>
                             }
                         }

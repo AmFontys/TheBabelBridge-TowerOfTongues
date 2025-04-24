@@ -6,7 +6,7 @@
 @using BBTT.Web.Components.ReUse;
 
 @inject CrossWordApiClient CrossWordApi
-@inject DataApiClient DataApi
+@inject AuthApiClient DataApi
 @inject NavigationManager NavigationManager
 
 <PageTitle>Crosswords</PageTitle>
@@ -24,7 +24,7 @@
             @foreach (var word in _crosswords)
             {
 
-                <tr @onclick="()=>sendToPlayPage(word.Name)">
+                <tr id="@(word.Name)-blz" @onclick="@(()=>sendToPlayPage(word.Name))">
                     <td>@word.Name</td>
                     <td>@word.Description</td>
                     <td>@foreach (var tag in @word.Tags) { @tag}</td>
@@ -46,9 +46,8 @@
         return crosswordList.ToArray();
     }
 
-    private async Task sendToPlayPage(string name)
+    private void sendToPlayPage(string name)
     {
-        NavigationManager.NavigateTo($"/crossword/{name}");
-        await Task.CompletedTask;
+        NavigationManager.NavigateTo($"/crossword/{name}");       
     }
 }

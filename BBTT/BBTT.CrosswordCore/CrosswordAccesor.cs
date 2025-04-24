@@ -40,7 +40,7 @@ public class CrosswordAccesor : ICrosswordAccesor
         var grid = await _crosswordGenerator.ConstructCrossword(words, cancellationToken);
         if (grid != null)
         {
-            crosswordGrid.GridEntries = grid.Select(kvp => new GridEntry { Row = kvp.Key.x, Column = kvp.Key.y, Value = kvp.Value }).ToList(); ;
+            crosswordGrid.GridEntries = grid.Select(kvp => new GridEntry { Row = kvp.Key.x, Column = kvp.Key.y, Value = (char)kvp.Value }).ToList();
             return crosswordGrid;
         }
         //TODO Add logic if no grid could be made

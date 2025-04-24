@@ -14,7 +14,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         _pgsqlDbContext = pgsqlDbContext;
     }
 
-    public async Task<int> CreateCrossword (Crossword crossword)
+    public async Task<int> CreateCrossword(Crossword crossword)
     {
         CrosswordDto crosswordDto = new()
         {
@@ -25,9 +25,20 @@ public class CrosswordDataAcess : ICrosswordDataAccess
             {
                 GridEntries = new List<GridEntryDTO>(),
             },
+            Words = crossword.crosswordWords.Select(word => new CrosswordWordDTO()
+            {
+                Word = word.Word,
+                Direction = word.Direction,
+                Diffuclty = word.Diffuclty,
+                Language = word.Language,
+                Hint = word.Hint,
+            }).ToList()
         };
-        await _pgsqlDbContext.Crosswords.AddAsync(crosswordDto);        
+
+        // Add the crossword with its related words
+        await _pgsqlDbContext.Crosswords.AddAsync(crosswordDto);
         await _pgsqlDbContext.SaveChangesAsync();
+
         return crosswordDto.Id;
     }
 
