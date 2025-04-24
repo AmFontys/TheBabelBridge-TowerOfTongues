@@ -11,10 +11,10 @@ It can be that some other need to be implemented first to have it available on t
 |Database|Retrieve Crossword|&#x2611;| Get the saved generated crossword|
 |Crossword|Show Crosswords|&#x2611;| Show all possible crosswords that can be played|
 |Crossword|Play Crossword|&#x2611;| Play a specif crossword|
-|Crossword|Finish Crossword|&#x2612;| Make it able to finish the crossword when everything is filled in |
+|Crossword|Finish Crossword|&#x2611;| Make it able to finish the crossword when everything is filled in |
 |Crossword| Multiplayer small|&#x2612;| Be able to at least connect with 2 people on the same crossword|
 |Lang| Multi lang app|&#x2612;| Be able to switch languages of the interface/Frontend|
-|Crossword|Hints on the crossword|&#x2612;| Be able to see the hints on the crossword with the numbers|
+|Crossword|Hints on the crossword|&#x2611;| Be able to see the hints on the crossword with the numbers|
 |Cloud|Cloud site|&#x2611;| Have the entire application be able to run in the cloud|
 |Generation|File Generation|&#x2611;| A player can give a (csv) file with all the words and directions they specify and based on that generate the crossword |
 |Security|Only auth functions|&#x2612;|Make it so only when logged in or being an employee certain functions can be executed|
@@ -22,7 +22,7 @@ It can be that some other need to be implemented first to have it available on t
 |Security|Two-Factor Authentication|&#x2612;|Add two-factor authentication for enhanced account security|
 |Multiplayer|Real-time Collaboration|&#x2612;|Improve the multiplayer experience so the host is more important and with accidental changes of both(or more) players that host changes will be accepted|
 |Multiplayer|CRDTs|&#x2612;|Add CRDTs to solve the conflicts better then `Real-time Collaboration` and also more graceful|
-|Employee|Employee Crossword|&#x2612;|An employee crossword should standout and give the impression that it differs from the user generation|
+|Employee|Employee Crossword|&#x2611;|An employee crossword should standout and give the impression that it differs from the user generation|
 |Employee|Player management|&#x2612;|An employee can help a player if they want to know what is saved for them (GDPR) and if they have an account|
 |Leaderboard|Leaderboard of speed|&#x2612;|A player can come on the leaderboard with the time they took|
 |Employee| Roles & Roles|&#x2612;|Make it so only a specif employee role can do something and doesn't cross what they should be able to do(ex. HR nothing with players or Crossword makers nothing with finance)|
