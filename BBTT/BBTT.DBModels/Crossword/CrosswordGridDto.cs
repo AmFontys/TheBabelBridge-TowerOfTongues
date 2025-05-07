@@ -14,7 +14,7 @@ public class CrosswordGridDto
 
     [ForeignKey("CrosswordId")]
     [JsonIgnore]
-    public CrosswordDto Crossword { get; set; }
+    public CrosswordDTO Crossword { get; set; }
 
     [Required]
     public List<GridEntryDTO> GridEntries { get; set; } = new List<GridEntryDTO>();

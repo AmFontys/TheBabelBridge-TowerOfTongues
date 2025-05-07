@@ -19,6 +19,7 @@ public class Program
         builder.AddNpgsqlDbContext<DbContextPostgres>("bbttdb");
         builder.Services.AddDbContext<DbContextPostgres>();
         builder.Services.AddScoped<ICrosswordDataAccess, CrosswordDataAcess>();
+        builder.Services.AddScoped<IUserDataAcess, UserDataAcess>();
 
         builder.Services.AddControllers()
              .AddJsonOptions(options =>

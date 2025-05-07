@@ -16,7 +16,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
 
     public async Task<int> CreateCrossword(Crossword crossword)
     {
-        CrosswordDto crosswordDto = new()
+        CrosswordDTO crosswordDto = new()
         {
             Name = crossword.Name,
             Description = crossword.Description,
@@ -42,7 +42,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         return crosswordDto.Id;
     }
 
-    public async Task<CrosswordDto> GetCrossword(int id)
+    public async Task<CrosswordDTO> GetCrossword(int id)
     {
         var result = await _pgsqlDbContext.Crosswords
             .Include(c => c.CrosswordGrid)
@@ -84,19 +84,19 @@ public class CrosswordDataAcess : ICrosswordDataAccess
     }
 
     
-    public async Task<CrosswordDto> GetCrossword (Crossword crosswordDto)
+    public async Task<CrosswordDTO> GetCrossword (Crossword crosswordDto)
     {
         var result = await _pgsqlDbContext.Crosswords.FindAsync(crosswordDto);
         return result;
     }
 
-    public Task<List<CrosswordDto>> GetCrosswords ()
+    public Task<List<CrosswordDTO>> GetCrosswords ()
     {
         var result = _pgsqlDbContext.Crosswords.ToListAsync();
         return result;
     }
 
-    public Crossword MapCrosswords (CrosswordDto crossword)
+    public Crossword MapCrosswords (CrosswordDTO crossword)
     {
         Crossword _mappedCrossword = new()
         {            
@@ -116,7 +116,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         return _mappedCrossword;
     }
 
-    public List<Crossword> MapCrosswords (List<CrosswordDto> crosswords)
+    public List<Crossword> MapCrosswords (List<CrosswordDTO> crosswords)
     {
         List<Crossword> _mappedCrosswords = new();
         foreach (var crossword in crosswords)
@@ -126,7 +126,7 @@ public class CrosswordDataAcess : ICrosswordDataAccess
         return _mappedCrosswords;
     }
 
-    public Task<CrosswordDto> GetCrossword (string name)
+    public Task<CrosswordDTO> GetCrossword (string name)
     {
         var result = _pgsqlDbContext.Crosswords
             .Include(c => c.CrosswordGrid)

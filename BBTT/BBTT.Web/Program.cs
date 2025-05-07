@@ -50,12 +50,12 @@ builder.Services.AddHttpClient<object>(client =>
 #endregion
 
 #region SignalR
-builder.Services.AddResponseCompression(options =>
-{
-    options.EnableForHttps = true;
-    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-        new [] { "application/octet-stream" });
-});
+//builder.Services.AddResponseCompression(options =>
+//{
+//    options.EnableForHttps = true;
+//    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+//        new [] { "application/octet-stream" });
+//});
 
 //builder.Services.AddSignalR(options =>
 //{

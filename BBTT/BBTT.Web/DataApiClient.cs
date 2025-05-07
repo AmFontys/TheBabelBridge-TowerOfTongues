@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using UserModel;
 namespace BBTT.Web;
 /// <summary>
 /// The data api client used to communicate with the data api
@@ -90,4 +91,18 @@ public class DataApiClient
         response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful        
         return response;
     }
+
+    public async Task<User> Login(string email, string password)
+    {
+        var user = new LoginModel
+        {
+            Email = email,
+            Password = password
+        };
+        var response = await _httpClient.PostAsJsonAsync("/login",user);
+        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        var result = await response.Content.ReadFromJsonAsync<User>();
+        return result;
+    }
+
 }

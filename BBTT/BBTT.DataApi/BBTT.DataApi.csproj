@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBTT.AuthCore\BBTT.AuthCore.csproj" />
     <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
     <ProjectReference Include="..\BBTT.DBModels\BBTT.DBModels.csproj" />
     <ProjectReference Include="..\BBTT.DBPostgres\BBTT.DBPostgres.csproj" />

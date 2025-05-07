@@ -23,8 +23,9 @@ var crosswordAPI = builder.AddProject<Projects.BBTT_CrosswordAPI>("crosswordapi"
     ;
 
 var authapi = builder.AddProject<Projects.BBTT_AuthApi>("bbtt-authapi")
-    .WithReference(dataApi)
-    .WaitFor(dataApi);
+    //.WithReference(dataApi)
+    //.WaitFor(dataApi)
+    ;
 
 #endregion
 
@@ -41,8 +42,6 @@ builder.AddProject<Projects.BBTT_Web>("webfrontend")
     .WaitFor(authapi)
     .WaitFor(dataApi);
 
-
-builder.AddProject<Projects.BBTT_AuthApi>("bbtt-authapi");
 
 
 await builder.Build().RunAsync();

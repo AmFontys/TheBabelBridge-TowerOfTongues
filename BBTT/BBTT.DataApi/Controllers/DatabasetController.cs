@@ -10,7 +10,7 @@ namespace BBTT.DataApi.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class DatabasetController : ControllerBase
-{     
+{
     private readonly ICrosswordDataAccess _crosswordDataAcess;
 
     public DatabasetController (ICrosswordDataAccess crosswordDataAccess)
@@ -18,16 +18,16 @@ public class DatabasetController : ControllerBase
         _crosswordDataAcess = crosswordDataAccess ?? throw new ArgumentNullException(nameof(crosswordDataAccess));
     }
 
-    [ HttpPost]
-    public async Task<IActionResult> Get(DbContextPostgres pgsqlDbContext, Crossword crossword)
+    [HttpPost]
+    public async Task<IActionResult> Get (DbContextPostgres pgsqlDbContext, Crossword crossword)
     {
-        var id= await _crosswordDataAcess.CreateCrossword(crossword);        
-        var result =await _crosswordDataAcess.CreateCrosswordGrid(id, crossword.CrosswordGrid);
-        if(result == 0)
-                return NotFound();
+        var id = await _crosswordDataAcess.CreateCrossword(crossword);
+        var result = await _crosswordDataAcess.CreateCrosswordGrid(id, crossword.CrosswordGrid);
+        if (result == 0)
+            return NotFound();
 
         return Ok();
-       
+
     }
 
     [HttpGet]
@@ -43,7 +43,7 @@ public class DatabasetController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCrossword (int id)
     {
-        var crossword = await _crosswordDataAcess.GetCrossword(id);        
+        var crossword = await _crosswordDataAcess.GetCrossword(id);
         var mapCrossword = _crosswordDataAcess.MapCrosswords(crossword);
         if (crossword == null)
             return NotFound();
@@ -60,4 +60,12 @@ public class DatabasetController : ControllerBase
         return Ok(mapCrossword);
     }
 
+    [HttpPost("help")]
+    public async Task<IActionResult> test (string name)
+    {
+        if (string.IsNullOrEmpty(name) )
+            return BadRequest("Name and password are required.");
+
+        return Ok();
+    }
 }

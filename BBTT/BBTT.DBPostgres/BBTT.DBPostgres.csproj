@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
     <ProjectReference Include="..\BBTT.DBModels\BBTT.DBModels.csproj" />
+    <ProjectReference Include="..\UserModel\UserModel.csproj" />
   </ItemGroup>
 
 </Project>

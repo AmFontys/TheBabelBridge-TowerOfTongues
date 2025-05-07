@@ -1,0 +1,84 @@
+﻿@page "/login"  
+@using UserModel  
+@rendermode InteractiveServer  
+@inject NavigationManager Navigation  
+@inject AuthApiClient AuthApi  
+@inject DataApiClient DataApi  
+@inject IJSRuntime JSRuntime  
+
+<PageTitle>Login</PageTitle>  
+
+<h1>Login</h1>  
+
+@if (!string.IsNullOrEmpty(_errorMessage))  
+{  
+   <div class="alert alert-danger" role="alert">  
+       @_errorMessage  
+   </div>  
+}  
+
+<div class="form-group">  
+   <label>  
+       Email: <input @bind="_email" />  
+   </label>  
+</div>  
+<div class="form-group">  
+   <label>  
+       Password: <input type="password" @bind="_password" />  
+   </label>  
+</div>  
+<div class="form-group">  
+   <button @onclick="LoginAsync" disabled="@_isLoading" type="button">Login</button>  
+</div>  
+
+@if (_isLoading)  
+{  
+   <div class="spinner-border" role="status">  
+       <span class="visually-hidden">Loading...</span>  
+   </div>  
+}  
+
+@code {  
+   private string? _email;  
+   private string? _password;  
+
+   private string? _errorMessage;  
+   private bool _isLoading;  
+
+   public async Task LoginAsync()  
+   {  
+       _isLoading = true;  
+       _errorMessage = null;  
+       try  
+       {  
+           await AuthApi.testConnection();  
+
+           var result = await AuthApi.Login(_email, _password);  
+           if (result == null)  
+           {  
+               _errorMessage = "Login failed. Please check your credentials.";  
+               return;  
+           }  
+           var resultLogin = await DataApi.Login(_email, _password);  
+           if (resultLogin.Name != "")  
+           {  
+               // Add user to session storage using JavaScript interop
+               await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "email", resultLogin.Email);  
+               await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "role", resultLogin.Role);  
+
+               Navigation.NavigateTo("/");  
+           }  
+           else{
+                _errorMessage = "Login failed. Please check your credentials.";
+           }
+       }  
+       catch (Exception ex)  
+       {  
+           _errorMessage = ex.Message;  
+       }  
+       finally  
+       {  
+           _isLoading = false;  
+       }  
+   }  
+}

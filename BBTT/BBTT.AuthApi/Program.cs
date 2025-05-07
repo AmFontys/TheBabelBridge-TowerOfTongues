@@ -1,4 +1,6 @@
 
+using BBTT.AuthCore;
+
 namespace BBTT.AuthApi;
 
 public class Program
@@ -9,6 +11,14 @@ public class Program
         builder.AddServiceDefaults();
 
         // Add services to the container.
+                
+        //builder.Services.AddHttpClient<IAuthAccesor, AuthAccesor>(client =>
+        //{
+        //    client.BaseAddress = new Uri("https+http://bbtt-authapi");
+        //    client.Timeout = TimeSpan.FromMinutes(5);
+        //});
+
+        builder.Services.AddSingleton<IAuthAccesor, AuthAccesor>();
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

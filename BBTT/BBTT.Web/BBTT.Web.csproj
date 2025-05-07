@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
     <ProjectReference Include="..\BBTT.ServiceDefaults\BBTT.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\UserModel\UserModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

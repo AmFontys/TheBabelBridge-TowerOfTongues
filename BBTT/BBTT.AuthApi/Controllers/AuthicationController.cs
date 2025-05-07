@@ -1,4 +1,6 @@
+using BBTT.AuthCore;
 using Microsoft.AspNetCore.Mvc;
+using UserModel;
 
 namespace BBTT.AuthApi.Controllers;
 
@@ -6,21 +8,33 @@ namespace BBTT.AuthApi.Controllers;
 [Route("[controller]")]
 public class AuthicationController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
+    
     private readonly ILogger<AuthicationController> _logger;
+    private readonly IAuthAccesor _authAccesor;
 
-    public AuthicationController(ILogger<AuthicationController> logger)
+    public AuthicationController(ILogger<AuthicationController> logger, IAuthAccesor authAccesor)
     {
         _logger = logger;
+        _authAccesor = authAccesor ?? throw new ArgumentNullException(nameof(authAccesor));
     }
 
-    [HttpPost(Name = "Login")]
-    public IActionResult Login ()
+    [HttpPost("/CheckLogin",Name = "Login")]
+    public async Task<ActionResult<User>> Login (LoginModel model)
     {
+        if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
+            return BadRequest("Email and password are required.");
 
+        User temp = new();
+        //var result = await _authAccesor.Login(email, password);
+        //if (result == null)
+        //    return NotFound();
+        //return Ok(result);
+        return Ok(temp);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> get ()
+    {
+        return Ok();
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BBTT.DBModels.Crossword;
-public class CrosswordDto
+public class CrosswordDTO
 {
     [Key]
     public int Id { get; set; }

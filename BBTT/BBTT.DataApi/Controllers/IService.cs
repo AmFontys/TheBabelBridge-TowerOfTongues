@@ -5,5 +5,5 @@ namespace BBTT.DataApi.Controllers;
 
 public interface IService
 {
-    Task<IEnumerable<CrosswordDto>> GetCrossword ();
+    Task<IEnumerable<CrosswordDTO>> GetCrossword ();
 }

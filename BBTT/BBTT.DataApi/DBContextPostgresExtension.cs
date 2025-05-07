@@ -10,7 +10,7 @@ public static class DBContextPostgresExtension
     {
         app.MapGet("/testConnection", async (DbContextPostgres pgsqlDbContext) =>
         {
-            await pgsqlDbContext.Crosswords.AddAsync(new CrosswordDto()
+            await pgsqlDbContext.Crosswords.AddAsync(new CrosswordDTO()
             {
                 Name = "Test",
                 Description = "Test",
