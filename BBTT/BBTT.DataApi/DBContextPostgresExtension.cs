@@ -32,13 +32,13 @@ public static class DBContextPostgresExtension
             }
         });
 
-        if (app.Environment.IsDevelopment())
-        {
+        //if (app.Environment.IsDevelopment())
+        //{
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<DbContextPostgres>();
                 context.Database.EnsureCreated();
             }
-        }
+        //}
     }
 }
