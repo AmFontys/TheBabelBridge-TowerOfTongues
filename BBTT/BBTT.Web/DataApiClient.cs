@@ -108,7 +108,7 @@ public class DataApiClient
 
     public async Task<User> Register (string name, string email, string password)
     {
-        var user = new User
+        var user = new RegisterModel
         {
             Name = name,
             Email = email,

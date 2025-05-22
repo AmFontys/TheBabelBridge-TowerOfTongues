@@ -1,0 +1,94 @@
+﻿@page "/register"
+@using UserModel
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@inject AuthApiClient AuthApi
+@inject DataApiClient DataApi
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Register</PageTitle>
+
+<div class="container mt-5" style="max-width: 400px;">
+    <h1 class="mb-4 text-center">Register</h1>
+
+    @if (!string.IsNullOrEmpty(_errorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @_errorMessage
+        </div>
+    }
+
+    <EditForm Model="this" OnValidSubmit="RegisterAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="_name" required />
+        </div>
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="_email" type="email" required />
+        </div>
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <InputText id="password" class="form-control" @bind-Value="_password" type="password" required minlength="6" />
+        </div>
+        <button class="btn btn-primary w-100" type="submit" disabled="@_isLoading">Register</button>
+    </EditForm>
+
+    @if (_isLoading)
+    {
+        <div class="text-center mt-3">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private string? _name;
+    private string? _email;
+    private string? _password;
+    private string? _errorMessage;
+    private bool _isLoading;
+    private string? _userRole;
+
+    private async Task RegisterAsync()
+    {
+        _isLoading = true;
+        _errorMessage = null;
+        try
+        {
+            var result = await AuthApi.Register(_name, _email, _password);
+            if (result == null)
+            {
+                _errorMessage = "Registering failed. Please try again later.";
+                return;
+            }
+            var resultLogin = await DataApi.Login(_email, _password);
+            if (resultLogin.Name != "")
+            {
+                _userRole = resultLogin.Role?.ToString();
+
+                await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "email", _email);
+                await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "role", _userRole);
+
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                _errorMessage = "Login failed. Please try another time.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

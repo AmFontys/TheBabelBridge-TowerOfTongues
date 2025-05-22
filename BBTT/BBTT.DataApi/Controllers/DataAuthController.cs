@@ -43,16 +43,16 @@ public class DataAuthController : ControllerBase
     }
 
     [HttpPost("Register")]
-    public async Task<IActionResult> Register (string name, string email, string password)
+    public async Task<IActionResult> Register (RegisterModel model)
     {
-        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
             return BadRequest("Name, email and password are required.");
         var salt = encryptionConfig.Salt();
-        var saltedPassword = encryptionConfig.Hash(password + salt);
+        var saltedPassword = encryptionConfig.Hash(model.Password + salt);
         var user = new User
         {
-            Name = name,
-            Email = email,
+            Name = model.Name,
+            Email = model.Email,
             Password = saltedPassword,
             Role = UserRoles.User,
             Salt = salt
