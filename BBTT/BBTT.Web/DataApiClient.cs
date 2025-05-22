@@ -121,8 +121,7 @@ public class DataApiClient
     }
 
     public async Task<bool> SendEmailToUserForAuth(string email)
-    {
-        email = "479450@student.fontys.nl"; // for test purposes  
+    {         
         var response = await _httpClient.PostAsJsonAsync($"/Email/{email}", email);
         response.EnsureSuccessStatusCode();
         return true;
@@ -131,7 +130,7 @@ public class DataApiClient
     {
         VerficationModel model = new VerficationModel
         {
-            Email = "479450@student.fontys.nl", // for testing
+            Email = email
             Code = code
         };
 
