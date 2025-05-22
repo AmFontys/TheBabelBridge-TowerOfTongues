@@ -19,7 +19,7 @@ It can be that some other need to be implemented first to have it available on t
 |Generation|File Generation|&#x2611;| A player can give a (csv) file with all the words and directions they specify and based on that generate the crossword |
 |Security|Only auth functions|&#x2611;|Make it so only when logged in or being an employee certain functions can be executed|
 |Database|Database Que|&#x2612;|When adding or retrieving data wait for it on a que so downtown of entering data won't happen easily|
-|Security|Two-Factor Authentication|&#x2612;|Add two-factor authentication for enhanced account security|
+|Security|Two-Factor Authentication|&#x2611;|Add two-factor authentication for enhanced account security|
 |Multiplayer|Real-time Collaboration|&#x2611;|Improve the multiplayer experience so the host is more important and with accidental changes of both(or more) players that host changes will be accepted|
 |Multiplayer|CRDTs|&#x2611;|Add CRDTs to solve the conflicts better then `Real-time Collaboration` and also more graceful|
 |Employee|Employee Crossword|&#x2611;|An employee crossword should standout and give the impression that it differs from the user generation|
@@ -32,7 +32,7 @@ It can be that some other need to be implemented first to have it available on t
 |Support |Help Center|&#x2612;|Provide a help center with FAQs and support options|
 |Generation| Clear all|&#x2615;|Make it easy to delete all words from the list and start over|
 |Generation|Word finder|&#x2612;| A player can put in their begin of a word and it will look for closest match words to speed up the entering of words|
-|Employee| Send email to player|&#x2612;|Make it so an employee can send an email to a player like a ban or changes to privacy statement|
+|Employee| Send email to player|&#x2611;|Make it so an employee can send an email to a player like a ban or changes to privacy statement|
 |Cloud|Kubernetes support|&#x2611;|Make it so the application is run in Kubernetes|
 |Employee|Ban list|&#x2612;|An employee can ban a player for whatever reason and they shouldn't be able to make a new account or play for sometime (soft-ban) |
 |Employee|Ban list extended|&#x2612;|An employee can ban a player and they shouldn't be able to make a new account and can't register with the same MAC/IP-address (hard-ban) (this is here for the extra challenge that this can give) |
