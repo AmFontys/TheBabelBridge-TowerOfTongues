@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Components\Pages\EmployeeDashBoard.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Components\Pages\CrosswordMaker.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

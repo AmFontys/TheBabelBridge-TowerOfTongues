@@ -9,9 +9,9 @@ namespace BBTT.TestCrossword;
 
 public class CrosswordAccesorTests
 {
-    private MockRepository mockRepository;
+    private readonly MockRepository mockRepository;
 
-    private Mock<ICrosswordGenerator> mockCrosswordGenerator;
+    private readonly Mock<ICrosswordGenerator> mockCrosswordGenerator;
 
     public CrosswordAccesorTests()
     {
@@ -31,7 +31,7 @@ public class CrosswordAccesorTests
     {
         // Arrange
         var crosswordAccesor = this.CreateCrosswordAccesor();
-        CrosswordGrid resultGrid = null;
+        CrosswordGrid resultGrid = new();
 
         // Act
         var result = crosswordAccesor.AddBlankValuesToGrid(
@@ -47,7 +47,7 @@ public class CrosswordAccesorTests
     {
         // Arrange
         var crosswordAccesor = this.CreateCrosswordAccesor();
-        CrosswordWord[] words = null;
+        CrosswordWord[]? words = null;
         CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
         // Act
@@ -65,8 +65,8 @@ public class CrosswordAccesorTests
     {
         // Arrange
         var crosswordAccesor = this.CreateCrosswordAccesor();
-        CrosswordWord[] verticalWords = null;
-        CrosswordWord[] horizantalWords = null;
+        CrosswordWord[]? verticalWords = null;
+        CrosswordWord[]? horizantalWords = null;
         CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
         // Act

@@ -1,0 +1,19 @@
+﻿@page "/Employee"
+@rendermode InteractiveServer
+@attribute [StreamRendering(true)]
+@attribute [Authorize()]
+
+@using BBTT.CrosswordModel;
+@using Microsoft.AspNetCore.Authorization
+
+@inject EmployeeApiClient EmployeeApi
+@inject DataApiClient DataApi
+
+<PageTitle>Employee Dashboard</PageTitle>
+
+
+
+@code {
+    
+
+}

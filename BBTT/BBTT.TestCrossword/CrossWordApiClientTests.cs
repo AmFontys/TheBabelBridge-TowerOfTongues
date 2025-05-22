@@ -10,9 +10,9 @@ namespace BBTT.TestCrossword;
 
 public class CrossWordApiClientTests
 {
-    private MockRepository mockRepository;
+    private readonly MockRepository mockRepository;
 
-    private Mock<HttpClient> mockHttpClient;
+    private readonly Mock<HttpClient> mockHttpClient;
 
     public CrossWordApiClientTests()
     {

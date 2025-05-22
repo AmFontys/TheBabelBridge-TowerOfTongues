@@ -9,11 +9,11 @@ namespace BBTT.CrosswordCore;
 
 public class CrosswordGenerator : ICrosswordGenerator
 {
-    private Dictionary<(int x, int y), char>? grid;
+    private Dictionary<(int x, int y), char>? grid=[];
 
     public async Task<Dictionary<(int x, int y), char>> ConstructCrossword (CrosswordWord [] words, CancellationToken cancellationToken)
     {
-        grid = [];
+        grid=[];
         Random random = new Random();
         words = words.OrderBy(x => random.Next()).ToArray(); // Shuffle the words
 
@@ -42,6 +42,8 @@ public class CrosswordGenerator : ICrosswordGenerator
 
     private Task PlaceOnGrid (CrosswordWord word, int x, int y)
     {
+        if (grid == null) return Task.CompletedTask;
+
         if(word.Word == null)
         {
             throw new ArgumentNullException(nameof(word));
