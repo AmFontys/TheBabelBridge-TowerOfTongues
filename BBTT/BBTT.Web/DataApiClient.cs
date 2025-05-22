@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -66,7 +67,7 @@ public class DataApiClient
         try
         {
             List<Crossword>? result = await response.Content.ReadFromJsonAsync<List<Crossword>>();
-            if (result.Count>0)
+            if (result != null && result.Count > 0)
             {
                 return result;
             }
@@ -103,6 +104,40 @@ public class DataApiClient
         response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
         var result = await response.Content.ReadFromJsonAsync<User>();
         return result;
+    }
+
+    public async Task<User> Register (string name, string email, string password)
+    {
+        var user = new User
+        {
+            Name = name,
+            Email = email,
+            Password = password
+        };
+        var response = await _httpClient.PostAsJsonAsync("/Register", user);
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadFromJsonAsync<User>();
+        return result;
+    }
+
+    public async Task<bool> SendEmailToUserForAuth(string email)
+    {
+        email = "479450@student.fontys.nl"; // for test purposes  
+        var response = await _httpClient.PostAsJsonAsync($"/Email/{email}", email);
+        response.EnsureSuccessStatusCode();
+        return true;
+    }
+    public async Task<bool> VerifyEmailCode (string email, string code)
+    {
+        VerficationModel model = new VerficationModel
+        {
+            Email = "479450@student.fontys.nl", // for testing
+            Code = code
+        };
+
+        var response = await _httpClient.PostAsJsonAsync("/Email/verify", model);
+        response.EnsureSuccessStatusCode();
+        return true;
     }
 
 }

@@ -72,7 +72,7 @@ public class CrossWordApiClient
     /// <returns>A list of type <see cref="CrosswordWord"/></returns>
     public async Task<List<CrosswordWord>> GetClosestWord (string input)
     {
-        List<CrosswordWord>? words = null;
+        List<CrosswordWord>? words = new List<CrosswordWord>();
         if (input == "App")
             words.Add(new CrosswordWord("Apple", "Basic", "English", ""));
         else
@@ -87,7 +87,7 @@ public class CrossWordApiClient
         if (input != null)
         {
             using var content = new MultipartFormDataContent();
-            var fileContent = new StreamContent(input.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15)); // Adjust max size as needed
+            StreamContent fileContent = new StreamContent(content: input.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15)); // Adjust max size as needed
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(input.ContentType);
             content.Add(fileContent, "input", input.Name); // Ensure the name matches the API parameter
 

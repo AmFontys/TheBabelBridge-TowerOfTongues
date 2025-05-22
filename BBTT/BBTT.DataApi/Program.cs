@@ -2,6 +2,7 @@
 using BBTT.DataApi.Controllers;
 using BBTT.DBModels;
 using BBTT.DBPostgres;
+using BBTT.Email;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using System.Text.Json.Serialization;
@@ -20,6 +21,11 @@ public class Program
         builder.Services.AddDbContext<DbContextPostgres>();
         builder.Services.AddScoped<ICrosswordDataAccess, CrosswordDataAcess>();
         builder.Services.AddScoped<IUserDataAcess, UserDataAcess>();
+
+        builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+        builder.Services.AddSingleton<IEmail, EmailAccesor>();
+        builder.Services.AddScoped<IEmailDataAcess, EmailDataAcess>();
+
 
         builder.Services.AddControllers()
              .AddJsonOptions(options =>

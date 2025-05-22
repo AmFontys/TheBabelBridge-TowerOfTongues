@@ -1,4 +1,5 @@
 ﻿using BBTT.DBModels.Crossword;
+using BBTT.DBModels.Email;
 using BBTT.DBModels.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,9 @@ public class DbContextPostgres : DbContext
     public DbSet<UserDTO> Users => Set<UserDTO>();
     public DbSet<UserCrosswordDTO> UserCrosswords => Set<UserCrosswordDTO>();
     public DbSet<UserRolesDTO> UserRoles => Set<UserRolesDTO>();
+
+    // Email
+    public DbSet<EmailVerficationDTO> Emails => Set<EmailVerficationDTO>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -56,6 +60,9 @@ public class DbContextPostgres : DbContext
             .HasOne(uc => uc.Crossword)
             .WithMany()
             .HasForeignKey(uc => uc.CrosswordId);
+
+        modelBuilder.Entity<EmailVerficationDTO>()
+            .HasKey(e => e.Id);
 
         base.OnModelCreating(modelBuilder);
     }
