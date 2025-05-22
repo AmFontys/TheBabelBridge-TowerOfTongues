@@ -70,7 +70,7 @@
             var resultLogin = await DataApi.Login(_email, _password);
             if (resultLogin.Name != "")
             {
-                _userRole = resultLogin.Role?.ToString();
+                _userRole = resultLogin.Role.ToString();
 
                 await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "email", _email);
                 await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "role", _userRole);

@@ -130,7 +130,7 @@ public class DataApiClient
     {
         VerficationModel model = new VerficationModel
         {
-            Email = email
+            Email = email,
             Code = code
         };
 
