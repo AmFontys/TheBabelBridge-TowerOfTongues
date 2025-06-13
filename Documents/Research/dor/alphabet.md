@@ -86,7 +86,7 @@ I will follow (wysiwyg* Software Design GmbH, n.d.) with finding all systems tha
 **Gunjala Gondi**: from 18c till today  
 **Hanunoo**: from 18c till today  
 **Rejang**: from 18c till today  
-**Tagbanwa**:  from 18c till today
+**Tagbanwa**:  from 18c till today  
 **Thaana**: from 18c till today  
 **Braille Patterns**: from 1821 till today  
 **Cherokee**: from 1821 till today  
@@ -357,7 +357,7 @@ For example Armenian is used by Armenia only but it's a country so for me this s
 
 ## Is it in Unicode
 
-I will write every writing system that is also included in Unicode as this my main method of translating the different scripts and so people don't have to install special scripts for it.
+I will write every writing system that is also included in Unicode as this is my main method of translating the different scripts and so people don't have to install any special scripts to see the scripts and play them. It also helps that for databases its a basic requirement to support it.
 
 **Adlam**, **Arabic**, **Armenian**, **Balinese**,  
 **Batak**, **Bengali**, **Braille patterns**, **Cham**,  
