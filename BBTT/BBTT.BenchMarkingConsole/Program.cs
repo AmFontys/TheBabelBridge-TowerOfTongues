@@ -37,8 +37,15 @@ namespace BBTT.BenchMarkingConsole
 
         public static void Main (string [] args)
         {
-            _serviceProvider.GetServices<CrosswordCoreBenchmark>();
-            var summary = BenchmarkRunner.Run<Md5VsSha256>();
+            //_serviceProvider.GetServices<CrosswordCoreBenchmark>();
+            //var summary = BenchmarkRunner.Run<Md5VsSha256>();
+
+            CrosswordCoreBenchmark crosswordCoreBenchmark = _serviceProvider.GetRequiredService<CrosswordCoreBenchmark>();
+            if (crosswordCoreBenchmark == null)
+            {
+                throw new InvalidOperationException("CrosswordCoreBenchmark service is not registered.");
+            }
+            var summary = BenchmarkRunner.Run<CrosswordCoreBenchmark>();
         }
         
 

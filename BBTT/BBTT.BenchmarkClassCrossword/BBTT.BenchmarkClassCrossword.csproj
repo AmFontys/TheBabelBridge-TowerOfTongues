@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.14.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BBTT.CrosswordAPI\BBTT.CrosswordAPI.csproj" />
     <ProjectReference Include="..\BBTT.CrosswordModel\BBTT.CrosswordModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="testCSV.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

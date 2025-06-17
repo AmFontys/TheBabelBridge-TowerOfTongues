@@ -33,7 +33,8 @@ public class CrosswordGenerator : ICrosswordGenerator
 
             if (!TryPlaceWord(words [ i ]))
             {
-                Console.WriteLine($"Could not place word: {words [ i ].Word}");
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
+                Console.WriteLine($"Could not place word: {words[i].Word}");
             }
         }
 
