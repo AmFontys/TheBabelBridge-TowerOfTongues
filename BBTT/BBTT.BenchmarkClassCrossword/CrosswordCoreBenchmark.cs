@@ -13,26 +13,28 @@ using System.IO;
 namespace BBTT.BenchmarkClassCrossword
 {
     [MemoryDiagnoser]
+    [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
+    [MarkdownExporter, CsvExporter, HtmlExporter]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class CrosswordCoreBenchmark
     {
         private readonly CrosswordGenerator crosswordGenerator;
 
-        [Params(10,100,1000,1000000)]
-        public int addWords;
+        [Params(10,100,1000,10000)]
+        public int amountOfWords;
 
         public CrosswordCoreBenchmark()
         {
             crosswordGenerator = new CrosswordGenerator();
         }
 
-        [Benchmark]
+        [Benchmark(Baseline =true)]
         public void TestMethodGenerateCrossword ()
         {
             List<CrosswordWord> words = new List<CrosswordWord>();                       
 
             // Add more words as needed
-            for(int i =0; i < addWords; i++)
+            for(int i =0; i < amountOfWords; i++)
             {
                 words.Add(new CrosswordWord($"Test{i}", $"Test hint #{i}", "ACROSS"));
             }
@@ -55,7 +57,7 @@ namespace BBTT.BenchmarkClassCrossword
                     MissingFieldFound = null
                 });
 
-                var records = csvReader.GetRecords<CrosswordWord>().ToList();
+                var records = csvReader.GetRecords<CrosswordWord>().Take(amountOfWords).ToList();
                 CrosswordAccesor crosswordController = new CrosswordAccesor(crosswordGenerator);
                 var result = crosswordController.ConstructCrossword(records.ToArray(), CancellationToken.None).Result;
             }
