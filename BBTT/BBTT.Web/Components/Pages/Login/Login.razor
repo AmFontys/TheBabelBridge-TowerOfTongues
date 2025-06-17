@@ -1,0 +1,153 @@
+﻿@page "/login"
+@using UserModel
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@inject AuthApiClient AuthApi
+@inject DataApiClient DataApi
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Login</PageTitle>
+
+<h1>Login</h1>
+
+@if (!string.IsNullOrEmpty(_errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @_errorMessage
+    </div>
+}
+
+<div class="form-group">
+    <label>
+        Email: <input @bind="_email" />
+    </label>
+</div>
+<div class="form-group">
+    <label>
+        Password: <input type="password" @bind="_password" />
+    </label>
+</div>
+<div class="form-group">
+    <button @onclick="LoginAsync" disabled="@_isLoading" type="button">Login</button>
+</div>
+
+@if (_isLoading)
+{
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+
+<!-- Email Verification Modal -->
+@if (_showVerificationModal)
+{
+    <div class="modal show d-block" tabindex="-1" style="background:rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Email Verification</h5>
+                </div>
+                <div class="modal-body">
+                    <p>A verification code has been sent to your email. Please enter it below:</p>
+                    <input @bind="_verificationCode" maxlength="8" class="form-control" />
+                    @if (!string.IsNullOrEmpty(_verificationError))
+                    {
+                        <div class="alert alert-danger mt-2">@_verificationError</div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <p>
+                        Please see the privacy statement
+                        <a href="/privacy-statement" title="Privacy statement">here</a>.
+                    </p>
+                    <button class="btn btn-primary" @onclick="VerifyCodeAsync" disabled="@_isVerifying">Verify</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private string? _email;
+    private string? _password;
+    private string? _errorMessage;
+    private bool _isLoading;
+
+    // Verification modal state
+    private bool _showVerificationModal = false;
+    private string? _verificationCode;
+    private string? _verificationError;
+    private bool _isVerifying = false;
+
+    private string? _userRole; // Add this field to store the role after login
+
+    public async Task LoginAsync()
+    {
+        _isLoading = true;
+        _errorMessage = null;
+        try
+        {
+            await AuthApi.testConnection();
+
+            var result = await AuthApi.Login(_email, _password);
+            if (result == null)
+            {
+                _errorMessage = "Login failed. Please check your credentials.";
+                return;
+            }
+            var resultLogin = await DataApi.Login(_email, _password);
+            if (resultLogin.Name != "")
+            {
+                _userRole = resultLogin.Role.ToString();
+
+                // Send verification code to email
+                await DataApi.SendEmailToUserForAuth(_email);
+
+                // Show modal for code entry
+                _showVerificationModal = true;
+            }
+            else
+            {
+                _errorMessage = "Login failed. Please check your credentials.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private async Task VerifyCodeAsync()
+    {
+        _isVerifying = true;
+        _verificationError = null;
+        try
+        {
+            var isValid = await DataApi.VerifyEmailCode(_email, _verificationCode);
+            if (isValid)
+            {
+                // Add user to session storage using JavaScript interop
+                await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "email", _email);
+                await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "role", _userRole);
+
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                _verificationError = "Invalid code. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _verificationError = ex.Message;
+        }
+        finally
+        {
+            _isVerifying = false;
+        }
+    }
+}

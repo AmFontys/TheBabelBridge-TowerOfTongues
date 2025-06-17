@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BBTT.CrosswordModel;
-public class CrosswordCell
+public class GridEntry
 {
-    public char Character { get; set; }
-    public CrosswordWord Word { get; set; } // Reference to the word it belongs to
+    public int Row { get; set; }
+    public int Column { get; set; }
+    public char Value { get; set; }
 }

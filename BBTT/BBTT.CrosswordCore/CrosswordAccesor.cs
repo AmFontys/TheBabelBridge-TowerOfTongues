@@ -5,55 +5,54 @@ namespace BBTT.CrosswordCore;
 
 public class CrosswordAccesor : ICrosswordAccesor
 {
-    private ICrosswordGenerator _crosswordGenerator;
+    private readonly ICrosswordGenerator _crosswordGenerator;
 
-    public CrosswordAccesor (ICrosswordGenerator crosswordGenerator)
+    public CrosswordAccesor(ICrosswordGenerator crosswordGenerator)
     {
         _crosswordGenerator = crosswordGenerator;
     }
 
-    public CrosswordGrid AddBlankValuesToGrid (CrosswordGrid result)
+    public CrosswordGrid AddBlankValuesToGrid(CrosswordGrid result)
     {
-        int minRow = result.Grid.Keys.Min(k => k.Item1);
-        int maxRow = result.Grid.Keys.Max(k => k.Item1);
+        int minRow = result.GridEntries.Min(k => k.Row);
+        int maxRow = result.GridEntries.Max(k => k.Row);
 
-        int minCol = result.Grid.Keys.Min(k => k.Item2);
-        int maxCol = result.Grid.Keys.Max(k => k.Item2);
+        int minCol = result.GridEntries.Min(k => k.Column);
+        int maxCol = result.GridEntries.Max(k => k.Column);
 
         for (int i = minRow; i <= maxRow; i++)
         {
             for (int j = minCol; j <= maxCol; j++)
             {
-                if (!result.Grid.ContainsKey((i, j)))
+                if (!result.GridEntries.Any(e => e.Row == i && e.Column == j))
                 {
-                    result.Grid.Add((i, j), '@');
+                    result.GridEntries.Add(new GridEntry { Row = i, Column = j, Value = '@' });
                 }
             }
         }
         return result;
-
     }
 
-    public async Task<CrosswordGrid> ConstructCrossword (CrosswordWord [] words, CancellationToken cancellationToken)
+    public async Task<CrosswordGrid> ConstructCrossword(CrosswordWord[] words, CancellationToken cancellationToken)
     {
+        CrosswordGrid crosswordGrid = new();
         ArgumentNullException.ThrowIfNull(words);
         var grid = await _crosswordGenerator.ConstructCrossword(words, cancellationToken);
         if (grid != null)
         {
-            CrosswordGrid crosswordGrid = new();
-            crosswordGrid.Grid = grid;
+            crosswordGrid.GridEntries = grid.Select(kvp => new GridEntry { Row = kvp.Key.x, Column = kvp.Key.y, Value = (char)kvp.Value }).ToList();
             return crosswordGrid;
         }
         //TODO Add logic if no grid could be made
-        return null;
+        return crosswordGrid;
     }
 
-    public Task<string> ConstructCrossword (CrosswordWord [] verticalWords, CrosswordWord [] horizantalWords, CancellationToken cancellationToken)
+    public Task<string> ConstructCrossword(CrosswordWord[] verticalWords, CrosswordWord[] horizantalWords, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<CrosswordGrid> GetCrosswordGrid (int id)
+    public Task<CrosswordGrid> GetCrosswordGrid(int id)
     {
         throw new NotImplementedException();
     }

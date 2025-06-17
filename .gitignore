@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 .azure
 /api
+.vscode/settings.json
