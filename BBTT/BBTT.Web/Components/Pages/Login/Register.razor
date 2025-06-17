@@ -34,6 +34,10 @@
             <label for="password">Password</label>
             <InputText id="password" class="form-control" @bind-Value="_password" type="password" required minlength="6" />
         </div>
+        <p>
+            Please see the privacy statement
+            <a href="/privacy-statement" title="Privacy statement">here</a>.
+        </p>
         <button class="btn btn-primary w-100" type="submit" disabled="@_isLoading">Register</button>
     </EditForm>
 
