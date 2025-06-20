@@ -63,5 +63,21 @@ public class DataAuthController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPost("DeleteUser")]
+    public async Task<IActionResult> DeleteUser (string email)
+    {
+        if (string.IsNullOrEmpty(email))
+            return BadRequest("Email is required.");
+
+        var user = await _userDataAccess.GetUser(email);
+        if (user == null)
+            return NotFound();
+
+        var result = await _userDataAccess.DeleteUser(user.Id);
+        if (!result)
+            return BadRequest("Failed to delete user.");
+
+        return Ok("User deleted successfully.");
+    }
 
 }

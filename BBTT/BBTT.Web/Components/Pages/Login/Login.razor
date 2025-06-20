@@ -8,64 +8,75 @@
 
 <PageTitle>Login</PageTitle>
 
-<h1>Login</h1>
+<div class="container mt-5" style="max-width: 400px;">
+    <h1 class="mb-4 text-center">Login</h1>
 
-@if (!string.IsNullOrEmpty(_errorMessage))
-{
-    <div class="alert alert-danger" role="alert">
-        @_errorMessage
+    @if (!string.IsNullOrEmpty(_errorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @_errorMessage
+        </div>
+    }
+
+    <EditForm Model="this" OnValidSubmit="LoginAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="_email" type="email" required />
+        </div>
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <InputText id="password" class="form-control" @bind-Value="_password" type="password" required minlength="6" />
+        </div>
+        <p>
+            Please see the privacy statement
+            <a href="/privacy-statement" title="Privacy statement">here</a>.
+        </p>
+        <button class="btn btn-primary w-100" type="submit" disabled="@_isLoading">Login</button>
+    </EditForm>
+
+    <div class="form-group mt-2 text-center">
+        <p>
+            Don't have an account? <a href="/register" title="Register">Register here</a>.
+        </p>
     </div>
-}
 
-<div class="form-group">
-    <label>
-        Email: <input @bind="_email" />
-    </label>
-</div>
-<div class="form-group">
-    <label>
-        Password: <input type="password" @bind="_password" />
-    </label>
-</div>
-<div class="form-group">
-    <button @onclick="LoginAsync" disabled="@_isLoading" type="button">Login</button>
-</div>
+    @if (_isLoading)
+    {
+        <div class="text-center mt-3">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
 
-@if (_isLoading)
-{
-    <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
-}
-
-<!-- Email Verification Modal -->
-@if (_showVerificationModal)
-{
-    <div class="modal show d-block" tabindex="-1" style="background:rgba(0,0,0,0.5);">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Email Verification</h5>
-                </div>
-                <div class="modal-body">
-                    <p>A verification code has been sent to your email. Please enter it below:</p>
-                    <input @bind="_verificationCode" maxlength="8" class="form-control" />
-                    @if (!string.IsNullOrEmpty(_verificationError))
-                    {
-                        <div class="alert alert-danger mt-2">@_verificationError</div>
-                    }
-                </div>
-                <div class="modal-footer">
-                    <p>
-                        Please see the privacy statement
-                        <a href="/privacy-statement" title="Privacy statement">here</a>.
-                    </p>
-                    <button class="btn btn-primary" @onclick="VerifyCodeAsync" disabled="@_isVerifying">Verify</button>
+    <!-- Email Verification Modal -->
+    @if (_showVerificationModal)
+    {
+        <div class="modal show d-block" tabindex="-1" style="background:rgba(0,0,0,0.5);">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Email Verification</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>A verification code has been sent to your email. Please enter it below:</p>
+                        <InputText @bind-Value="_verificationCode" maxlength="8" class="form-control" />
+                        @if (!string.IsNullOrEmpty(_verificationError))
+                        {
+                            <div class="alert alert-danger mt-2">@_verificationError</div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" @onclick="VerifyCodeAsync" disabled="@_isVerifying">Verify</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
 
 @code {
     private string? _email;
@@ -79,7 +90,7 @@
     private string? _verificationError;
     private bool _isVerifying = false;
 
-    private string? _userRole; // Add this field to store the role after login
+    private string? _userRole;
 
     public async Task LoginAsync()
     {
@@ -100,10 +111,8 @@
             {
                 _userRole = resultLogin.Role.ToString();
 
-                // Send verification code to email
                 await DataApi.SendEmailToUserForAuth(_email);
 
-                // Show modal for code entry
                 _showVerificationModal = true;
             }
             else
@@ -130,7 +139,6 @@
             var isValid = await DataApi.VerifyEmailCode(_email, _verificationCode);
             if (isValid)
             {
-                // Add user to session storage using JavaScript interop
                 await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "email", _email);
                 await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "role", _userRole);
 

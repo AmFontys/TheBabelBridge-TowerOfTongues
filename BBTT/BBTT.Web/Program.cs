@@ -20,30 +20,30 @@ builder.Services.AddProblemDetails();
 #region HTTPClients
 builder.Services.AddHttpClient<CrossWordApiClient>(client =>
 {
-    client.BaseAddress = new("https+http://crosswordapi");
+    client.BaseAddress = new("https+http://apiservice");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 builder.Services.AddHttpClient<DataApiClient>(client =>
 {
-    client.BaseAddress = new("https+http://bbtt-dataapi");
+    client.BaseAddress = new("https+http:/apiservice");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 
 builder.Services.AddHttpClient<AuthApiClient>(client =>
 {
-    client.BaseAddress = new("https+http://bbtt-authapi");
+    client.BaseAddress = new("https+http://apiservice");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 
 builder.Services.AddHttpClient<object>(client =>
 {
-    client.BaseAddress = new("https+http://user");
+    client.BaseAddress = new("https+http://apiservice");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 
 builder.Services.AddHttpClient<object>(client =>
 {
-    client.BaseAddress = new("https+http://employee");
+    client.BaseAddress = new("https+http://apiservice");
     client.Timeout = TimeSpan.FromMinutes(5);
 });
 

@@ -35,7 +35,7 @@ public class CrossWordApiClient
     {
         List<CrosswordWord>? encyclopedia = null;
 
-        await foreach (var forecast in _httpClient.GetFromJsonAsAsyncEnumerable<CrosswordWord>("/Crossword", cancellationToken))
+        await foreach (var forecast in _httpClient.GetFromJsonAsAsyncEnumerable<CrosswordWord>("/crossword/Crossword", cancellationToken))
         {
             if (encyclopedia?.Count >= maxItems)
             {
@@ -58,7 +58,7 @@ public class CrossWordApiClient
     /// <returns>The generated Crossword in the format of <see cref="CrosswordGrid"/></returns>
     public async Task<CrosswordGrid> PostWordsGetGrid (CrosswordWord [] words)
     {
-        var response = await _httpClient.PostAsJsonAsync("/Crossword", words);
+        var response = await _httpClient.PostAsJsonAsync("/crossword/Crossword", words);
         response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful        
         CrosswordGrid? result = await response.Content.ReadFromJsonAsync<CrosswordGrid>();
         //TODO: Check on null failure
@@ -80,18 +80,22 @@ public class CrossWordApiClient
         return words;
     }
 
-    public async Task<List<CrosswordWord>> ReadCsvFile (IBrowserFile? input)
+    public async Task<List<CrosswordWord>> ReadCsvFile(IBrowserFile? input)
     {
         List<CrosswordWord>? words = null;
 
         if (input != null)
         {
-            using var content = new MultipartFormDataContent();
-            StreamContent fileContent = new StreamContent(content: input.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15)); // Adjust max size as needed
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(input.ContentType);
-            content.Add(fileContent, "input", input.Name); // Ensure the name matches the API parameter
+            using var memoryStream = new MemoryStream();
+            await input.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15).CopyToAsync(memoryStream);
+            memoryStream.Position = 0; // Reset position
 
-            var response = await _httpClient.PostAsync("/readcsv", content);
+            using var content = new MultipartFormDataContent();
+            var fileContent = new StreamContent(memoryStream);
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(input.ContentType);
+            content.Add(fileContent, "input", input.Name);
+
+            var response = await _httpClient.PostAsync("/crossword/readcsv", content);
             if (response.IsSuccessStatusCode)
             {
                 words = await response.Content.ReadFromJsonAsync<List<CrosswordWord>>();

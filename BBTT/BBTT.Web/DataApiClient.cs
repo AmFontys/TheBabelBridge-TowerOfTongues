@@ -28,18 +28,18 @@ public class DataApiClient
     /// </summary>
     /// <param name="id">The identifier.</param>
     /// <returns></returns>
-    public async Task<CrosswordGrid> GetGrid (int id)
+    public async Task<CrosswordGrid> GetGrid(int id)
     {
-        var response = await _httpClient.GetAsync($"/Crossword/{id}");
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful        
+        var response = await _httpClient.GetAsync($"/data/Crossword/{id}");
+        response.EnsureSuccessStatusCode();
         CrosswordGrid? result = await response.Content.ReadFromJsonAsync<CrosswordGrid>();
         return result;
     }
 
-    public async Task<Crossword> GetCrosswordAsync (string name)
+    public async Task<Crossword> GetCrosswordAsync(string name)
     {
-        var response = await _httpClient.GetAsync($"/Databaset/{name}/get");
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        var response = await _httpClient.GetAsync($"/data/Databaset/{name}/get");
+        response.EnsureSuccessStatusCode();
         try
         {
             Crossword? result = await response.Content.ReadFromJsonAsync<Crossword>();
@@ -60,10 +60,10 @@ public class DataApiClient
     /// Gets the crosswords asynchronous.
     /// </summary>
     /// <returns>list of <see cref="Crossword"/> </returns>
-    public async Task<List<Crossword>> GetCrosswordsAsync ()
+    public async Task<List<Crossword>> GetCrosswordsAsync()
     {
-        var response = await _httpClient.GetAsync("/Databaset");
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        var response = await _httpClient.GetAsync("/data/Databaset");
+        response.EnsureSuccessStatusCode();
         try
         {
             List<Crossword>? result = await response.Content.ReadFromJsonAsync<List<Crossword>>();
@@ -88,8 +88,8 @@ public class DataApiClient
     /// <returns></returns>
     public async Task<HttpResponseMessage> SaveCrossword(Crossword crossword)
     {
-        var response = await _httpClient.PostAsJsonAsync("/Databaset", crossword);
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful        
+        var response = await _httpClient.PostAsJsonAsync("/data/Databaset", crossword);
+        response.EnsureSuccessStatusCode();
         return response;
     }
 
@@ -100,13 +100,13 @@ public class DataApiClient
             Email = email,
             Password = password
         };
-        var response = await _httpClient.PostAsJsonAsync("/login",user);
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        var response = await _httpClient.PostAsJsonAsync("/data/login", user);
+        response.EnsureSuccessStatusCode();
         var result = await response.Content.ReadFromJsonAsync<User>();
         return result;
     }
 
-    public async Task<User> Register (string name, string email, string password)
+    public async Task<User> Register(string name, string email, string password)
     {
         var user = new RegisterModel
         {
@@ -114,19 +114,19 @@ public class DataApiClient
             Email = email,
             Password = password
         };
-        var response = await _httpClient.PostAsJsonAsync("/Register", user);
+        var response = await _httpClient.PostAsJsonAsync("/data/Register", user);
         response.EnsureSuccessStatusCode();
         var result = await response.Content.ReadFromJsonAsync<User>();
         return result;
     }
 
     public async Task<bool> SendEmailToUserForAuth(string email)
-    {         
-        var response = await _httpClient.PostAsJsonAsync($"/Email/{email}", email);
+    {
+        var response = await _httpClient.PostAsJsonAsync($"/data/Email/{email}", email);
         response.EnsureSuccessStatusCode();
         return true;
     }
-    public async Task<bool> VerifyEmailCode (string email, string code)
+    public async Task<bool> VerifyEmailCode(string email, string code)
     {
         VerficationModel model = new VerficationModel
         {
@@ -134,7 +134,7 @@ public class DataApiClient
             Code = code
         };
 
-        var response = await _httpClient.PostAsJsonAsync("/Email/verify", model);
+        var response = await _httpClient.PostAsJsonAsync("/data/Email/verify", model);
         response.EnsureSuccessStatusCode();
         return true;
     }

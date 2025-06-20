@@ -16,7 +16,6 @@ var dataApi =builder.AddProject<Projects.BBTT_DataApi>("bbtt-dataapi")
 #endregion
 
 #region api's
-var apiService = builder.AddProject<Projects.BBTT_ApiService>("apiservice");
 var crosswordAPI = builder.AddProject<Projects.BBTT_CrosswordAPI>("crosswordapi")
     //.WithReference(signalR)
     //.WaitFor(signalR)
@@ -27,20 +26,23 @@ var authapi = builder.AddProject<Projects.BBTT_AuthApi>("bbtt-authapi")
     //.WaitFor(dataApi)
     ;
 
+var apiService = builder.AddProject<Projects.BBTT_ApiService>("apiservice")
+    .WithReference(crosswordAPI)
+    .WithReference(authapi)
+    .WithReference(dataApi)
+   ;
 #endregion
+
+
 
 builder.AddProject<Projects.BBTT_Web>("webfrontend")
     .WithExternalHttpEndpoints()
     //Refrences
     .WithReference(apiService)
-    .WithReference(crosswordAPI)
-    .WithReference(dataApi)
-    .WithReference(authapi)
-    //Waiting statements
-    .WaitFor(crosswordAPI)
     .WaitFor(apiService)
-    .WaitFor(authapi)
-    .WaitFor(dataApi);
+    ;
+
+
 
 
 

@@ -28,3 +28,23 @@ public class RegisterModel
     public string Email { get; set; }
     public string Password { get; set; }
 }
+
+public class ChangePasswordModel
+{
+    public string Email { get; set; }
+    public string OldPassword { get; set; }
+    public string NewPassword { get; set; }
+}
+
+public class ResetPasswordModel
+{
+    public string Email { get; set; }
+    public string NewPassword { get; set; }
+    public string ResetToken { get; set; }
+}
+
+public class VerifyEmailModel
+{
+    public string Email { get; set; }
+    public string VerificationToken { get; set; }
+}

@@ -15,21 +15,22 @@ public class AuthApiClient
     private readonly HttpClient _httpClient;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AuthApiClient"/> class.
+    /// Initializes a new instance of the <see cref="AuthApiClient"/> class with the specified <see cref="HttpClient"/>.
     /// </summary>
-    /// <param name="httpClient">The HTTP client.</param>
-    public AuthApiClient (HttpClient httpClient)
+    /// <param name="httpClient">The <see cref="HttpClient"/> instance used to send HTTP requests.</param>
+    public AuthApiClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        _httpClient.Timeout = TimeSpan.FromMinutes(5); // Increase timeout to 5 minutes
+        _httpClient.Timeout = TimeSpan.FromMinutes(5);
     }
 
     public async Task testConnection()
     {
-        var response = await _httpClient.GetAsync("/Authication");
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        var response = await _httpClient.GetAsync("/Auth/Authication");
+        response.EnsureSuccessStatusCode();
     }
-    public async Task<User> Login (string email, string password)
+
+    public async Task<User> Login(string email, string password)
     {
         LoginModel model = new()
         {
@@ -37,44 +38,44 @@ public class AuthApiClient
             Password = password
         };
 
-        var response = await _httpClient.PostAsJsonAsync("/CheckLogin", model);
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        var response = await _httpClient.PostAsJsonAsync("/Auth/CheckLogin", model);
+        response.EnsureSuccessStatusCode();
         User? result = await response.Content.ReadFromJsonAsync<User>();
         return result;
     }
 
-    public async Task<bool> Register (string name, string email, string password)
+    public async Task<bool> Register(string name, string email, string password)
     {
         var response = await _httpClient.PostAsJsonAsync("/Auth/register", new { name, email, password });
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        response.EnsureSuccessStatusCode();
         return true;
     }
 
-    public async Task<bool> Logout ()
+    public async Task<bool> Logout()
     {
         var response = await _httpClient.PostAsync("/Auth/logout", null);
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        response.EnsureSuccessStatusCode();
         return true;
     }
 
-    public async Task<bool> ChangePassword (string email, string oldPassword, string newPassword)
+    public async Task<bool> ChangePassword(string email, string oldPassword, string newPassword)
     {
         var response = await _httpClient.PostAsJsonAsync("/Auth/changePassword", new { email, oldPassword, newPassword });
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        response.EnsureSuccessStatusCode();
         return true;
     }
 
-    public async Task<bool> ResetPassword (string email)
+    public async Task<bool> ResetPassword(string email)
     {
         var response = await _httpClient.PostAsJsonAsync("/Auth/resetPassword", new { email });
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        response.EnsureSuccessStatusCode();
         return true;
     }
 
-    public async Task<bool> VerifyEmail (string email)
+    public async Task<bool> VerifyEmail(string email)
     {
         var response = await _httpClient.PostAsJsonAsync("/Auth/verifyEmail", new { email });
-        response.EnsureSuccessStatusCode(); // Throws an exception if the status code is not successful
+        response.EnsureSuccessStatusCode();
         return true;
     }
 }

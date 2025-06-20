@@ -10,18 +10,14 @@ public static class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.AddServiceDefaults();
 
-        // Add services to the container.
-                
-        //builder.Services.AddHttpClient<IAuthAccesor, AuthAccesor>(client =>
-        //{
-        //    client.BaseAddress = new Uri("https+http://bbtt-authapi");
-        //    client.Timeout = TimeSpan.FromMinutes(5);
-        //});
-
-        builder.Services.AddSingleton<IAuthAccesor, AuthAccesor>();
+        // Register AuthAccesor with HttpClient configured for the API gateway
+        builder.Services.AddHttpClient<IAuthAccesor, AuthAccesor>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7518");
+            client.Timeout = TimeSpan.FromMinutes(5);
+        });
 
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
@@ -29,7 +25,6 @@ public static class Program
 
         app.MapDefaultEndpoints();
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -37,12 +32,8 @@ public static class Program
         }
 
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-
-
         app.MapControllers();
-
         app.Run();
     }
 }

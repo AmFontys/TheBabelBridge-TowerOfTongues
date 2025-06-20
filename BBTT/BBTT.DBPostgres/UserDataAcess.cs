@@ -105,7 +105,10 @@ public class UserDataAcess : IUserDataAcess
         var userDto = await _pgsqlDbContext.Users.FindAsync(id);
         if (userDto == null)
             return false;
-        _pgsqlDbContext.Users.Remove(userDto);
+        //Anonymize user data instead of deleting it so the crosswords are still available
+        userDto.Name = "Deleted User";
+        userDto.Password = userDto.Password.Substring(0, 5) + "*****"; // Keep first 5 characters for reference
+
         await _pgsqlDbContext.SaveChangesAsync();
         return true;
     }

@@ -9,10 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BBTT.ServiceDefaults\BBTT.ServiceDefaults.csproj" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.3.1" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Abstractions" Version="9.3.1" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Dns" Version="9.3.1" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="9.3.1" />
+    <PackageReference Include="Yarp.ReverseProxy" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBTT.ServiceDefaults\BBTT.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
