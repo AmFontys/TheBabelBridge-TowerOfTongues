@@ -14,7 +14,6 @@ namespace BBTT.BenchmarkClassCrossword
 {
     [MemoryDiagnoser]
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
-    [MarkdownExporter, CsvExporter, HtmlExporter]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class CrosswordCoreBenchmark
     {
@@ -45,7 +44,7 @@ namespace BBTT.BenchmarkClassCrossword
         }
 
         [Benchmark]
-        public void TestCsvGenerateCrossword()
+        public void TestCsvGenerateCrosswordWithTake()
         {
             var csvPath = Path.Combine(AppContext.BaseDirectory, "testCSV.csv");
             try
@@ -66,6 +65,43 @@ namespace BBTT.BenchmarkClassCrossword
                 Console.WriteLine($"CSV file not found: {ex.Message}");
                 throw;
             }            
+            catch (IOException ex)
+            {
+                Console.WriteLine($"IO error while accessing CSV file: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+                throw;
+            }
+        }
+        [Benchmark]
+        public void TestCsvGenerateCrosswordWithRandomSampling()
+        {
+            var csvPath = Path.Combine(AppContext.BaseDirectory, "testCSV.csv");
+            try
+            {
+                using var reader = new StreamReader(csvPath, System.Text.Encoding.UTF8);
+                using var csvReader = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HeaderValidated = null,
+                    MissingFieldFound = null
+                });
+
+                var records = csvReader.GetRecords<CrosswordWord>().ToList();
+
+                var random = new Random();
+                var sampledRecords = records.OrderBy(_ => random.Next()).Take(amountOfWords).ToList();
+
+                CrosswordAccesor crosswordController = new CrosswordAccesor(crosswordGenerator);
+                var result = crosswordController.ConstructCrossword(sampledRecords.ToArray(), CancellationToken.None).Result;
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine($"CSV file not found: {ex.Message}");
+                throw;
+            }
             catch (IOException ex)
             {
                 Console.WriteLine($"IO error while accessing CSV file: {ex.Message}");

@@ -41,11 +41,16 @@ namespace BBTT.BenchMarkingConsole
             //var summary = BenchmarkRunner.Run<Md5VsSha256>();
 
             CrosswordCoreBenchmark crosswordCoreBenchmark = _serviceProvider.GetRequiredService<CrosswordCoreBenchmark>();
-            if (crosswordCoreBenchmark == null)
+            CrosswordLangComparison crosswordLangComparison = _serviceProvider.GetRequiredService<CrosswordLangComparison>();
+            if (crosswordCoreBenchmark == null || crosswordLangComparison == null)
             {
-                throw new InvalidOperationException("CrosswordCoreBenchmark service is not registered.");
+                throw new InvalidOperationException("CrosswordCoreBenchmark or CrosswordLangComparison service is not registered.");
             }
             var summary = BenchmarkRunner.Run<CrosswordCoreBenchmark>();
+            var summary2 = BenchmarkRunner.Run<CrosswordLangComparison>();
+
+            
+
         }
         
 
@@ -60,6 +65,9 @@ namespace BBTT.BenchMarkingConsole
             services.AddSingleton<ILogger<CrosswordController>>(provider =>
                 LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<CrosswordController>());
             services.AddSingleton<CrosswordCoreBenchmark>();
+
+            // Register dependencies for CrosswordLangComparison
+            services.AddSingleton<CrosswordLangComparison>();
 
             return services.BuildServiceProvider();
         }
