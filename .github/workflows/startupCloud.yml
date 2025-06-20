@@ -1,0 +1,40 @@
+name: Scheduled Azure Container Apps Startup
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # Every day at 08:00 UTC
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  startup:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      RESOURCE_GROUP: rg-az-bbtt
+      CONTAINER_APPS: "apiservice bbtt-authapi bbtt-dataapi crosswordapi postgres webfrontend"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+      - name: Azure Login (Federated Credentials)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Scale Azure Container Apps to one replica
+        run: |
+          for app in $CONTAINER_APPS; do
+            az containerapp update --name "$app" --resource-group "$RESOURCE_GROUP" --scale-min-replicas 1 || echo "Failed to scale $app"
+          done
